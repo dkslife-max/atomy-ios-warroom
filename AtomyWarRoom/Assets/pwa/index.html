@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f2747">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <title>Atomy 行動戰情 v0.4.7</title>
+  <style>
+:root{--navy:#0f2747;--blue:#175cd3;--green:#067647;--gold:#b58a3b;--text:#101828;--muted:#667085;--line:#e4e7ec;--bg:#f5f7fb;--danger:#b42318;--warn:#b54708}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:16px}.hidden{display:none!important}button,input,select,textarea{font:inherit}button{cursor:pointer}#app{max-width:760px;margin:0 auto;min-height:100vh;padding-bottom:36px}.appHeader{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;background:rgba(15,39,71,.96);color:#fff;backdrop-filter:blur(12px)}.appHeader small,.sectionTitle small,.sheetHead small{font-size:11px;letter-spacing:.14em;font-weight:850;opacity:.75}.appHeader h1{margin:3px 0 0;font-size:24px}.iconBtn,.ghostBtn{border:1px solid rgba(255,255,255,.25);background:transparent;color:inherit;border-radius:10px;padding:9px 13px;font-weight:800}.emptyView{padding:88px 28px;text-align:center}.emptyIcon{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:#eaf2ff;color:var(--blue);font-size:34px;font-weight:900}.emptyView h2{font-size:27px;margin:0 0 10px}.emptyView p{color:var(--muted);line-height:1.7;margin:0 auto 24px;max-width:520px}.primary,.secondary,.danger,.wideBtn{border:0;border-radius:12px;padding:12px 16px;font-weight:850;display:inline-flex;justify-content:center;align-items:center;text-decoration:none}.primary{background:var(--navy);color:#fff}.secondary{background:#eaf2ff;color:#174ea6}.danger{background:#fef3f2;color:var(--danger)}.big{width:100%;min-height:50px;margin:7px 0}.primary input,.secondary input{display:none}.card{margin:14px 12px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 6px 18px rgba(16,24,40,.035)}.controlCard{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:13px}.controlCard label{font-size:12px;color:var(--muted);font-weight:800}.controlCard select{width:100%;margin-top:6px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:var(--text);font-weight:800}.summaryGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 12px}.summaryBox{padding:16px;border-radius:16px;background:#fff;border:1px solid var(--line)}.summaryBox.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--navy),#173d6a);color:#fff}.summaryBox span{display:block;font-size:12px;color:var(--muted);font-weight:800}.summaryBox.wide span{color:#d6e4f5}.summaryBox strong{display:block;font-size:25px;margin-top:5px}.summaryBox small{display:block;margin-top:4px;color:#98a2b3}.sectionCard{padding:16px}.sectionTitle{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sectionTitle h2{margin:3px 0 0;font-size:22px}.sectionTitle p{max-width:300px;margin:0;color:var(--muted);font-size:12px;line-height:1.55;text-align:right}.segment{display:grid;grid-template-columns:1fr 1fr;margin:16px 0 8px;padding:4px;background:#f2f4f7;border-radius:12px}.segment button{border:0;background:transparent;border-radius:9px;padding:10px;font-weight:900;color:var(--muted)}.segment button.active{background:#fff;color:var(--navy);box-shadow:0 2px 7px rgba(16,24,40,.08)}.candidateList{display:flex;flex-direction:column}.candidateCard{padding:15px 0;border-bottom:1px solid #edf0f4}.candidateTop{display:flex;justify-content:space-between;gap:10px}.candidateTop h3{margin:0;font-size:18px}.candidateTop small{display:block;color:#98a2b3;font-size:11px;margin-top:2px}.tagRow{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px}.tag{font-size:11px;font-weight:850;padding:5px 8px;border-radius:999px;background:#eff8ff;color:var(--blue)}.tag.category{background:var(--navy);color:#fff}.facts{display:flex;gap:10px;flex-wrap:wrap;margin-top:9px;color:var(--muted);font-size:12px}.facts b{color:#344054}.historyStrip{display:grid;grid-template-columns:repeat(8,minmax(42px,1fr));gap:5px;overflow-x:auto;margin-top:10px;padding-bottom:3px}.historyCell{min-width:42px;text-align:center;border:1px solid #eef1f5;border-radius:8px;padding:6px 3px;background:#f8fafc}.historyCell b{display:block;font-size:10px;color:#667085}.historyCell span{display:block;font-size:10px;margin-top:3px;color:#98a2b3}.historyCell.active{background:#eef6ff;border-color:#b2ccff}.historyCell.active span{color:#175cd3;font-weight:850}.actionText{margin-top:10px;background:#fff7ed;color:#9a3412;border-radius:10px;padding:9px 10px;font-size:13px;font-weight:750;line-height:1.45}.cardActions{display:flex;gap:8px;margin-top:10px}.cardActions button{flex:1;border-radius:10px;padding:9px 10px;font-size:12px;font-weight:850}.manageBtn{border:0;background:var(--navy);color:#fff}.skipBtn{border:1px solid var(--line);background:#fff;color:var(--muted)}.wideBtn{width:100%;margin-top:12px;background:#eff8ff;color:var(--blue)}.excludedDetails{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}.excludedDetails summary{color:var(--muted);font-size:13px;font-weight:850}.excludedRow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #f2f4f7}.excludedRow small{display:block;color:#98a2b3}.excludedRow button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 9px}.followMetrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.followMetric{background:#f8fafc;border-radius:12px;padding:11px;text-align:center}.followMetric strong{display:block;font-size:21px}.followMetric span{font-size:11px;color:var(--muted)}.followRow{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #eef1f5}.followRow h4{margin:0}.followRow small{display:block;color:var(--muted);margin-top:3px}.followState{font-size:12px;font-weight:850;white-space:nowrap}.followState.overdue{color:var(--danger)}.followState.today{color:var(--warn)}.followState.week{color:var(--blue)}footer{text-align:center;color:#98a2b3;font-size:11px;padding:18px}.sheet{position:fixed;inset:0;z-index:50}.sheetBackdrop{position:absolute;inset:0;background:rgba(16,24,40,.48)}.sheetCard{position:absolute;left:0;right:0;bottom:0;max-width:760px;margin:auto;max-height:92vh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;padding:18px;padding-bottom:calc(22px + env(safe-area-inset-bottom));box-shadow:0 -16px 40px rgba(16,24,40,.2)}.smallSheet{max-height:74vh}.sheetHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.sheetHead h2{margin:3px 0 0}.sheetHead p{margin:4px 0 0;color:var(--muted);font-size:12px}.sheetHead .ghostBtn{color:var(--muted);border-color:var(--line)}.stickyHead{position:sticky;top:-18px;background:#fff;z-index:4;padding:18px 0 12px}.dataInfo{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;margin:14px 0;color:var(--muted);font-size:13px;line-height:1.5}.privacyNote{font-size:12px;color:#98a2b3;line-height:1.6}.signalWrap{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.purchaseHistory{border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:14px}.purchaseHistory h3{margin:0 0 9px;font-size:14px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formGrid label{font-size:12px;color:var(--muted);font-weight:800}.formGrid input,.formGrid select,.formGrid textarea,.logComposer input,.logComposer select{width:100%;margin-top:5px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:var(--text)}.formGrid .full{grid-column:1/-1}.buttonRow{display:flex;gap:10px;margin-top:13px}.buttonRow>*{flex:1}.logSection{margin-top:20px;padding-top:15px;border-top:1px solid var(--line)}.logSection h3{margin:0 0 10px}.logComposer{display:grid;grid-template-columns:1fr 1fr;gap:8px}.logComposer input[type=text]{grid-column:1/-1}.logComposer button{grid-column:1/-1}.logRow{padding:10px 0;border-bottom:1px solid #eef1f5}.logRow div{display:flex;gap:8px;align-items:center}.logRow strong{font-size:13px}.logRow span{font-size:11px;color:var(--muted)}.logRow p{margin:5px 0 0;color:#475467;font-size:13px}.emptyMini{text-align:center;padding:28px 10px;color:#98a2b3}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:99;background:#101828;color:#fff;border-radius:999px;padding:10px 16px;font-size:13px;box-shadow:0 8px 25px rgba(16,24,40,.25)}@media(max-width:560px){.sectionTitle{display:block}.sectionTitle p{text-align:left;margin-top:5px;max-width:none}.candidateTop{display:block}.tagRow{justify-content:flex-start;margin-top:8px}.controlCard{grid-template-columns:1fr}.formGrid{grid-template-columns:1fr}.formGrid .full{grid-column:auto}.historyStrip{grid-template-columns:repeat(8,52px)}.followMetrics{grid-template-columns:repeat(3,1fr)}}
+/* v0.2 雙雷達 */
+.radarSegment{margin-bottom:8px;background:#eef2ff}.radarSegment button.active{color:#5925dc}.radarHint{font-size:12px;color:#667085;line-height:1.6;padding:2px 3px 7px}.tag.category.operator{background:#5925dc}.tag.category.consumer{background:#b54708}.candidateCard.operator .actionText{background:#f4f3ff;color:#5925dc}.candidateCard.consumer .actionText{background:#fff7ed;color:#9a3412}.pairHistoryStrip{display:grid;grid-template-columns:repeat(8,minmax(62px,1fr));gap:5px;overflow-x:auto;margin-top:10px;padding-bottom:3px}.pairCell{min-width:62px;border:1px solid #eef1f5;border-radius:9px;padding:6px 4px;background:#f8fafc;text-align:center}.pairCell b{display:block;font-size:10px;color:#667085}.pairCell span{display:block;font-size:9px;color:#98a2b3;margin-top:2px}.pairCell em{display:inline-block;margin-top:4px;font-style:normal;font-size:10px;font-weight:900;color:#667085}.pairCell.near{background:#fff7ed;border-color:#fedf89}.pairCell.near em{color:#b54708}.pairCell.hit{background:#ecfdf3;border-color:#abefc6}.pairCell.hit em{color:#067647}
+@media(max-width:560px){.pairHistoryStrip{grid-template-columns:repeat(8,70px)}}
+
+
+/* v0.4.7 rebuilt */
+.topicComposer textarea,.topicComposer input,.manualForm input,.manualForm select,.manualForm textarea,.personalBox textarea,.convertBox input{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;color:var(--text)}
+.topicComposer textarea{min-height:130px;resize:vertical}.topicComposer .row,.archiveActions,.logActions{display:flex;gap:8px;flex-wrap:wrap}.topicComposer .row>*{flex:1}
+.keywordWrap{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.keywordChip{display:inline-flex;align-items:center;gap:5px;background:#f2f4f7;border:1px solid var(--line);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:800}
+.topicResult{border-top:1px solid #eef1f5;padding:14px 0}.topicResult h4{margin:0}.topicResult small{color:var(--muted)}.topicSnippet{margin:8px 0;padding:9px 10px;background:#f8fafc;border-radius:10px;color:#475467;font-size:13px;line-height:1.5}.topicHit{color:#b54708;font-weight:850}
+.manualSearchResults{max-height:200px;overflow:auto;margin-top:8px;border:1px solid var(--line);border-radius:12px}.manualSearchItem{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #eef1f5;background:#fff;padding:10px}.manualForm{display:grid;gap:10px}.manualForm label{font-size:12px;color:var(--muted);font-weight:800}
+.prospectBadge{display:inline-flex;background:#fff4ed;color:#b54708;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:850}.archiveBox{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}.archiveBox summary{font-size:13px;color:var(--muted);font-weight:850}.archiveRow{padding:10px 0;border-bottom:1px solid #eef1f5}.archiveRow small{color:var(--muted)}.archiveActions button,.logActions button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;font-size:11px;font-weight:800}
+.convertBox{background:#fff7ed;border:1px solid #fedf89;border-radius:12px;padding:12px;margin:12px 0}.convertBox h3{margin:0 0 7px;font-size:14px}.stopBtn{background:#fff4ed;color:#b54708;border:1px solid #fed7aa!important}.personalBox textarea{min-height:170px;resize:vertical}
+.toneTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:12px 0}.toneTabs button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px;font-size:12px;font-weight:850}.toneTabs button.active{background:#eef4ff;color:#175cd3;border-color:#b2ccff}.topicEmpty{padding:20px 5px;color:#98a2b3;text-align:center}.inlineMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}.inlineMeta span{font-size:10px;background:#f2f4f7;border-radius:999px;padding:3px 6px;color:#667085}
+
+</style>
+<link rel="stylesheet" href="native.css">
+  <link rel="stylesheet" href="./operator-insights.css">
+</head>
+<body>
+<div id="app">
+  <header class="appHeader">
+    <div>
+      <small>ATOMY MOBILE COMMAND</small>
+      <h1>行動戰情</h1>
+    </div>
+    <button id="dataBtn" class="iconBtn">資料</button>
+  </header>
+
+  <section id="emptyView" class="emptyView">
+    <div class="emptyIcon">◎</div>
+    <h2>先匯入資料包</h2>
+    <p>可匯入電腦戰情板的「完整備份」或「領袖專屬包」。資料只存在這支手機，不會自動上傳雲端。</p>
+    <label class="primary big">匯入 JSON<input id="importFile" type="file" accept=".json,application/json"></label>
+  </section>
+
+  <main id="mainView" class="hidden">
+    <section class="controlCard card">
+      <label>領袖<select id="leaderSelect"></select></label>
+      <label>觀察期別<select id="periodSelect"></select></label>
+    </section>
+
+    <section id="summary" class="summaryGrid"></section>
+<div id="snapshotBanner" class="snapshotBanner hidden"></div>
+    <section id="businessDashboard" class="card sectionCard hidden"></section>
+    <section id="todayCareCard" class="card sectionCard hidden"></section>
+
+    <section class="card sectionCard">
+      <div class="sectionTitle">
+        <div><small>ACTION RADAR · v0.4.7</small><h2>行動雷達</h2></div>
+        <p>先選「經營潛力」或「消費者」。消費者雷達會納入本期所有購買者，先依訊號排序前 6 名；不適合可排除並自動補位。</p>
+      </div>
+      <div class="segment radarSegment" id="radarTabs">
+        <button data-radar="operator" class="active">經營潛力</button>
+        <button data-radar="consumer">消費者</button>
+      </div>
+      <div class="radarHint"><b>經營潛力</b>看左右線 PV 是否形成對碰條件；<b>消費者</b>本期所有購買者都會被納入，再看頻率、回購、回流與大單變化排序。</div>
+      <div class="segment" id="sideTabs">
+        <button data-side="L" class="active">左線</button>
+        <button data-side="R">右線</button>
+      </div>
+      <div id="candidateList" class="candidateList"></div>
+      <button id="toggleMoreBtn" class="wideBtn hidden">展開更多</button>
+      <details id="excludedDetails" class="excludedDetails hidden"><summary>已排除推薦</summary><div id="excludedList"></div></details>
+    </section>
+
+    <section class="card sectionCard">
+      <div class="sectionTitle">
+        <div><small>FOLLOW-UP</small><h2>追蹤管理名單</h2></div>
+        <p>可自由新增正式會員或尚未入會的潛在會員；電話、備註與聯繫紀錄只存在本機。</p>
+      </div>
+      <div id="followMetrics" class="followMetrics"></div>
+      <div id="followList" class="followList"></div>
+      <button id="manualAddBtn" class="wideBtn">＋ 自由新增追蹤會員／潛在會員</button>
+      <details id="archiveDetails" class="archiveBox hidden"><summary id="archiveSummary">已停止追蹤（0）</summary><div id="archiveList"></div></details>
+    </section>
+    <section class="card sectionCard" id="topicRadarCard">
+      <div class="sectionTitle"><div><small>TOPIC RADAR</small><h2>話題雷達</h2></div><p>貼上 LINE 群組貼文，抓關鍵字後掃描 CRM 備註與聯繫紀錄。</p></div>
+      <div class="topicComposer"><textarea id="topicPost" placeholder="貼上今天的公版貼文…"></textarea><div class="row"><button id="extractTopicBtn" class="secondary">自動抓關鍵字</button><button id="scanTopicBtn" class="primary">掃描 CRM 紀錄</button></div><input id="manualKeywords" type="text" placeholder="也可自己補：苦瓜、飲食、甜食…（逗號分隔）"><div id="keywordWrap" class="keywordWrap"></div></div>
+      <div id="topicResults" class="topicEmpty">尚未掃描。</div>
+    </section>
+  </main>
+
+  <footer>v0.4.7 個人私訊版 · CRM 本機保存 · 無雲端同步</footer>
+</div>
+
+<div id="dataSheet" class="sheet hidden">
+  <div class="sheetBackdrop" data-close-sheet="1"></div>
+  <section class="sheetCard smallSheet">
+    <div class="sheetHead"><div><small>LOCAL DATA</small><h2>資料管理</h2></div><button data-close-sheet="1" class="ghostBtn">關閉</button></div>
+    <div id="dataInfo" class="dataInfo">尚未載入</div>
+    <label class="primary big">匯入／更換資料包<input id="importFile2" type="file" accept=".json,application/json"></label>
+    <button id="exportBtn" class="secondary big">匯出手機完整備份</button>
+    <button id="installBtn" class="secondary big">安裝到手機桌面</button>
+    <button id="updateAppBtn" class="secondary big">檢查 APP 更新</button>
+    <button id="clearBtn" class="danger big">清除這支手機資料</button>
+    <p class="privacyNote">完整備份可能包含電話、聯絡方式與備註，請妥善保管。</p>
+  </section>
+</div>
+
+<div id="memberSheet" class="sheet hidden">
+  <div class="sheetBackdrop" data-close-member="1"></div>
+  <section class="sheetCard memberSheetCard">
+    <div class="sheetHead stickyHead"><div><small>會員走勢</small><h2 id="memberTitle">會員</h2><p id="memberMeta">—</p></div><button data-close-member="1" class="ghostBtn">關閉</button></div>
+    <div id="memberSignals" class="signalWrap"></div>
+    <div id="memberPairHistory" class="purchaseHistory"></div>
+    <div id="memberGrowthHistory" class="purchaseHistory hidden"></div>
+    <div id="memberBusinessInsights" class="purchaseHistory hidden"></div>
+    <div id="memberPurchaseHistory" class="purchaseHistory"></div>
+    <div id="prospectConvert" class="convertBox hidden"><h3>已經加入艾多美？</h3><div class="buttonRow"><input id="convertMemberNo" type="text" placeholder="輸入正式會員編號"><button id="convertMemberBtn" class="secondary">轉為正式會員</button></div></div>
+
+    <details class="crmDetails"><summary>聯絡資料與追蹤紀錄</summary>
+    <div class="formGrid">
+      <label>電話<input id="crmPhone" type="tel" placeholder="09xx-xxx-xxx"></label>
+      <label>LINE／微信／其他<input id="crmContact" type="text" placeholder="LINE ID、微信等"></label>
+      <label>實際消費者<input id="crmActualConsumer" type="text" placeholder="若帳號不是本人使用可填"></label>
+      <label>實際負責人<input id="crmOwner" type="text" placeholder="例如：黃鈺維"></label>
+      <label>目前狀態<select id="crmStatus"><option>觀察中</option><option>剛認識</option><option>已邀約</option><option>產品體驗中</option><option>考慮加入</option><option>持續消費</option><option>有興趣經營</option><option>已開始經營</option><option>暫緩追蹤</option><option>不需追蹤</option></select></label>
+      <label>聯繫週期<select id="crmCycle"><option value="7">7天</option><option value="14">14天</option><option value="30">30天</option><option value="60">60天</option><option value="90">90天</option><option value="0">不固定</option></select></label>
+      <label>上次聯繫<input id="crmLast" type="date"></label>
+      <label>下次追蹤<input id="crmNext" type="date"></label>
+      <label class="full">備註<textarea id="crmNote" rows="4" placeholder="產品偏好、家庭使用、這次要追什麼…"></textarea></label>
+    </div>
+    <div class="buttonRow"><button id="saveMemberBtn" class="primary">儲存</button><a id="callBtn" class="secondary hidden" href="#">直接撥電話</a><button id="stopFollowBtn" class="stopBtn">停止追蹤</button></div>
+
+    <section class="logSection">
+      <h3>聯繫紀錄</h3>
+      <div class="logComposer"><input id="logDate" type="date"><select id="logChannel"><option>電話</option><option>LINE</option><option>微信</option><option>面談</option><option>活動</option><option>其他</option></select><input id="logNote" type="text" placeholder="這次聊了什麼"><button id="addLogBtn" class="secondary">記錄</button></div>
+      <div id="logHistory"></div>
+    </section>
+    </details>
+  </section>
+</div>
+
+
+<div id="manualSheet" class="sheet hidden">
+  <div class="sheetBackdrop" data-close-manual="1"></div>
+  <section class="sheetCard smallSheet">
+    <div class="sheetHead"><div><small>MANUAL CRM</small><h2>自由新增追蹤</h2><p>正式會員可填會員編號；尚未入會可留空。</p></div><button data-close-manual="1" class="ghostBtn">關閉</button></div>
+    <div class="manualForm">
+      <label>搜尋現有會員（可選）<input id="manualSearch" type="text" placeholder="輸入姓名或會員編號"></label>
+      <div id="manualSearchResults" class="manualSearchResults hidden"></div>
+      <label>會員編號（尚未入會可留空）<input id="manualMemberNo" type="text" placeholder="例如：S3480115"></label>
+      <label>姓名<input id="manualName" type="text" placeholder="例如：黃鈺維"></label>
+      <label>電話<input id="manualPhone" type="tel" placeholder="09xx-xxx-xxx"></label>
+      <label>LINE／微信／其他<input id="manualContact" type="text" placeholder="LINE ID、微信等"></label>
+      <label>認識來源<input id="manualSource" type="text" placeholder="朋友介紹、活動、社群…"></label>
+      <label>目前狀態<select id="manualStatus"><option>剛認識</option><option>已邀約</option><option>產品體驗中</option><option>考慮加入</option><option>觀察中</option><option>持續消費</option><option>有興趣經營</option></select></label>
+      <label>下次追蹤<input id="manualNext" type="date"></label>
+      <label>備註<textarea id="manualNote" rows="4" placeholder="需求、下次要聊什麼…"></textarea></label>
+      <button id="saveManualBtn" class="primary big">加入追蹤名單</button>
+    </div>
+  </section>
+</div>
+
+<div id="personalSheet" class="sheet hidden">
+  <div class="sheetBackdrop" data-close-personal="1"></div>
+  <section class="sheetCard smallSheet">
+    <div class="sheetHead"><div><small>PERSONAL MESSAGE</small><h2>轉成個人私訊</h2><p id="personalMeta">—</p></div><button data-close-personal="1" class="ghostBtn">關閉</button></div>
+    <div class="toneTabs" id="toneTabs"><button data-tone="natural" class="active">自然問候</button><button data-tone="brief">簡短分享</button><button data-tone="familiar">熟人語氣</button></div>
+    <div class="personalBox"><textarea id="personalText"></textarea></div>
+    <div class="buttonRow"><button id="copyPersonalBtn" class="secondary">複製文字</button><button id="linePersonalBtn" class="primary">LINE 分享這段私訊</button></div>
+    <p class="privacyNote">訊息會先讓你確認與修改，不會自動發送給任何人。</p>
+  </section>
+</div>
+
+<script src="./operator-insights.js"></script>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);const fmt=new Intl.NumberFormat('zh-TW');
+const DB_BASE='atomy_mobile_command_v01',STORE='kv',accountParams=new URLSearchParams(location.search),rawAccount=accountParams.get('account')||'',accountScope=/^(?:S)?\d{6,12}$/i.test(rawAccount)?rawAccount.toUpperCase():'',legacyScope=(accountParams.get('legacyAccount')||'').toUpperCase(),DB=rawAccount?DB_BASE+'_'+(accountScope||'invalid'):DB_BASE;let dataset=null,crmStore={},exclusions={},graph=null,salesIndex=null,pairingCache=new Map(),selectedLeader='',selectedPeriod='',selectedSide='L',selectedRadar='operator',visibleLimit=6,currentMember='',editingLogId='',topicKeywords=[],topicMatches=[],personalTarget='',installPrompt=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nowIso=()=>new Date().toISOString();const localDateStr=(d=new Date())=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function addDaysStr(s,n){if(!s||!Number(n))return'';const d=new Date(`${s}T12:00:00`);if(Number.isNaN(d.getTime()))return'';d.setDate(d.getDate()+Number(n));return localDateStr(d)}
+function dateDiffDays(s){if(!s)return null;const a=new Date(`${localDateStr()}T12:00:00`),b=new Date(`${s}T12:00:00`);if(Number.isNaN(b.getTime()))return null;return Math.round((b-a)/86400000)}
+function periodKey(d){return d?`${d.slice(0,7)}-P${Number(d.slice(8,10))<=15?1:2}`:''}
+function prevPeriodKey(k){const m=String(k||'').match(/^(\d{4})-(\d{2})-P([12])$/);if(!m)return'';let y=+m[1],mo=+m[2],p=+m[3];if(p===2)return`${y}-${String(mo).padStart(2,'0')}-P1`;mo--;if(mo===0){mo=12;y--}return`${y}-${String(mo).padStart(2,'0')}-P2`}
+function recentPeriods(end,n=8){const out=[];let k=end;for(let i=0;i<n&&k;i++){out.unshift(k);k=prevPeriodKey(k)}return out}
+function periodLabel(k){const m=String(k||'').match(/^(\d{4})-(\d{2})-P([12])$/);return m?`${m[1]}/${m[2]} 第${m[3]}期`:k||'—'}
+function shortPeriod(k){const m=String(k||'').match(/^(\d{4})-(\d{2})-P([12])$/);return m?`${Number(m[2])}月${m[3]}期`:k}
+function formatPv(v){if(v===null||v===undefined||!Number.isFinite(Number(v)))return'—';const n=Number(v);if(Math.abs(n)>=10000)return`${(n/10000).toFixed(n>=1000000?0:1)}萬`;return fmt.format(Math.round(n))}
+function cleanCrmRecord(r,id){r=r&&typeof r==='object'?r:{};return{member:String(id||r.member||''),name:String(r.name||''),phone:String(r.phone||''),contact:String(r.contact||''),actualConsumer:String(r.actualConsumer||''),owner:String(r.owner||''),status:String(r.status||'觀察中'),cycleDays:Number(r.cycleDays??14)||0,lastContact:String(r.lastContact||''),nextContact:String(r.nextContact||''),note:String(r.note||''),logs:Array.isArray(r.logs)?r.logs.map(x=>({date:String(x.date||''),channel:String(x.channel||''),note:String(x.note||''),createdAt:String(x.createdAt||'')})):[],createdAt:String(r.createdAt||nowIso()),updatedAt:String(r.updatedAt||nowIso())}}
+function followState(r){const d=dateDiffDays(r?.nextContact||'');if(d==null)return{key:'none',label:'未設定追蹤'};if(d<0)return{key:'overdue',label:`逾期 ${Math.abs(d)} 天`};if(d===0)return{key:'today',label:'今天追蹤'};if(d<=7)return{key:'week',label:`${d} 天內`};return{key:'future',label:`${d} 天後`}}
+function toast(msg){const e=document.createElement('div');e.className='toast';e.textContent=msg;document.body.appendChild(e);setTimeout(()=>e.remove(),1800)}
+function downloadJson(obj,name){const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+
+function openDb(name=DB){return new Promise((res,rej)=>{const r=indexedDB.open(name,1);r.onupgradeneeded=()=>r.result.createObjectStore(STORE);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+function assertAccountDataset(value){if(rawAccount&&!accountScope)throw new Error('帳號資料範圍無法辨識');if(accountScope&&value?.organization?.rootId&&String(value.organization.rootId).toUpperCase()!==accountScope)throw new Error('資料所屬帳號不同，已停止載入')}
+async function migrateLegacyAccount(){
+  if(!accountScope||accountScope!==legacyScope||await dbGet('accountMigrationDone'))return;
+  const legacy=await openDb(DB_BASE),keys=['dataset','crm','exclusions','nativeStatuses'];
+  const values=await Promise.all(keys.map(key=>new Promise((resolve,reject)=>{const request=legacy.transaction(STORE).objectStore(STORE).get(key);request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)})));legacy.close();
+  const owner=String(values[0]?.organization?.rootId||'').toUpperCase(),target=await openDb();
+  await new Promise((resolve,reject)=>{const tx=target.transaction(STORE,'readwrite'),store=tx.objectStore(STORE),existing=store.get('dataset');existing.onsuccess=()=>{if(owner===accountScope&&!existing.result)keys.forEach((key,i)=>{if(values[i]!==undefined)store.put(values[i],key)});store.put(true,'accountMigrationDone')};tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||Error('帳號資料移轉未完成'))});target.close();
+}
+async function dbSet(k,v){const db=await openDb();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(v,k);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}
+async function dbGet(k){const db=await openDb();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readonly'),r=tx.objectStore(STORE).get(k);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function dbClear(){const db=await openDb();return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}
+
+function normalizeImport(data){if(!data||!data.organization||!Array.isArray(data.organization.members)||!Array.isArray(data.organization.edges)||!data.salesHistory||!Array.isArray(data.leaders))throw new Error('這不是可辨識的戰情板完整備份或領袖專屬包');return{base:{tool:String(data.tool||'Atomy 行動資料'),version:String(data.version||''),exportedAt:String(data.exportedAt||''),leader:data.leader||null,leaders:data.leaders.map(x=>({name:String(x.name||x.label||x.member||''),member:String(x.member||x.id||'')})),organization:data.organization,salesHistory:data.salesHistory||{},privacy:data.privacy||null},crm:data.crmStore&&typeof data.crmStore==='object'?data.crmStore:{},exclusions:data.candidateExclusions&&typeof data.candidateExclusions==='object'?data.candidateExclusions:{}}}
+async function importData(file){try{const raw=JSON.parse(await file.text()),n=normalizeImport(raw);const keepLocal=!!dataset&&confirm('這支手機已經有 CRM／追蹤資料。\n\n確定＝更新組織與業績，同時保留並合併手機現有 CRM／排除設定\n取消＝完全以這次匯入檔取代');const oldCrm=crmStore,oldEx=exclusions;assertAccountDataset(n.base);dataset=n.base;const importedCrm={};for(const[id,r]of Object.entries(n.crm))importedCrm[String(id)]=cleanCrmRecord(r,id);crmStore=keepLocal?{...importedCrm,...oldCrm}:importedCrm;exclusions=keepLocal?{...n.exclusions,...oldEx}:n.exclusions;await dbSet('dataset',dataset);await dbSet('crm',crmStore);await dbSet('exclusions',exclusions);prepareData();renderAll();closeDataSheet();toast(`已匯入 ${dataset.leaders.length} 位領袖資料${keepLocal?'，CRM 已保留':''}`)}catch(e){alert(`匯入失敗：${e.message}`)}}
+function prepareData(){if(!dataset)return;graph=buildGraph(dataset.organization);rebuildSalesIndex();const leaderIds=dataset.leaders.filter(x=>graph.memberMap.has(String(x.member)));if(!leaderIds.some(x=>String(x.member)===String(selectedLeader)))selectedLeader=String((dataset.leader?.member||leaderIds[0]?.member||dataset.organization.rootId||''));const keys=Object.keys(dataset.salesHistory||{}).sort();if(!keys.includes(selectedPeriod))selectedPeriod=keys.at(-1)||''}
+function buildGraph(org){const memberMap=new Map((org.members||[]).map(m=>[String(m.member),m])),children=new Map(),parentMap=new Map();for(const e of org.edges||[]){const p=String(e.parent),c=String(e.child),sideCode=String(e.sideCode||'');if(!children.has(p))children.set(p,[]);children.get(p).push({child:c,sideCode});parentMap.set(c,{parent:p,sideCode})}return{memberMap,children,parentMap}}
+function descendantsBySide(leaderId){const out={L:new Set(),R:new Set(),U:new Set()};for(const r of graph.children.get(String(leaderId))||[]){const side=r.sideCode==='L'||r.sideCode==='R'?r.sideCode:'U',stack=[r.child];while(stack.length){const id=String(stack.pop());if(out[side].has(id))continue;out[side].add(id);for(const ch of graph.children.get(id)||[])stack.push(ch.child)}}return out}
+function directSideState(id){let L=false,R=false;for(const ch of graph.children.get(String(id))||[]){if(ch.sideCode==='L')L=true;if(ch.sideCode==='R')R=true}return{L,R,both:L&&R,one:L||R,label:L&&R?'左右雙線':L?'只有左線':R?'只有右線':'尚未展開'}}
+function rebuildSalesIndex(){const perPeriod=new Map();for(const[pk,rows]of Object.entries(dataset.salesHistory||{})){const agg=new Map();for(const r of rows||[]){const id=String(r.member||'');if(!id)continue;let x=agg.get(id);if(!x){x={pv:0,name:String(r.name||'')};agg.set(id,x)}x.pv+=Number(r.pv||0)||0}perPeriod.set(pk,agg)}salesIndex={perPeriod};pairingCache=new Map()}
+function memberPvAt(id,pk){return Number(salesIndex?.perPeriod?.get(pk)?.get(String(id))?.pv||0)}
+function memberPurchaseSnapshot(id,pk){const keys=recentPeriods(pk,8),values=keys.map(k=>memberPvAt(id,k)),activeCount=values.filter(v=>v>0).length,totalPv=values.reduce((a,b)=>a+b,0),currentPv=values.at(-1)||0,prevPv=values.at(-2)||0,recent4=values.slice(-4),prior4=values.slice(0,4),recent4Active=recent4.filter(v=>v>0).length,prior4Active=prior4.filter(v=>v>0).length,consecutive3=values.slice(-3).every(v=>v>0),comeback=currentPv>0&&values.at(-2)===0&&values.at(-3)===0&&values.slice(0,-3).some(v=>v>0),dormant=currentPv===0&&prevPv===0&&values.slice(0,-2).filter(v=>v>0).length>=3,previousBuys=values.slice(0,-1).filter(v=>v>0),typicalPv=previousBuys.length?previousBuys.reduce((a,b)=>a+b,0)/previousBuys.length:0,frequencyUp=recent4Active>=2&&recent4Active>=prior4Active+2,stableRepeat=activeCount>=5||recent4Active>=3,largeOrder=currentPv>=100000,relativeSpike=currentPv>=30000&&typicalPv>0&&currentPv>=typicalPv*2.5,spikeMultiple=typicalPv>0?currentPv/typicalPv:null;return{keys,values,activeCount,totalPv,currentPv,prevPv,recent4Active,prior4Active,consecutive3,comeback,dormant,typicalPv,frequencyUp,stableRepeat,largeOrder,relativeSpike,spikeMultiple}}
+function pairingMaps(pk){const key=String(pk||'');if(pairingCache.has(key))return pairingCache.get(key);const total=new Map(),left=new Map(),right=new Map(),members=dataset?.organization?.members||[];for(const m of members)total.set(String(m.member),memberPvAt(m.member,pk));const ordered=[...members].sort((a,b)=>Number(b.depth||b.rawDepth||0)-Number(a.depth||a.rawDepth||0));for(const m of ordered){const id=String(m.member),pv=Number(total.get(id)||0),rel=graph.parentMap.get(id);if(!rel)continue;const parent=String(rel.parent);total.set(parent,Number(total.get(parent)||0)+pv);if(rel.sideCode==='L')left.set(parent,Number(left.get(parent)||0)+pv);else if(rel.sideCode==='R')right.set(parent,Number(right.get(parent)||0)+pv)}const out={total,left,right};pairingCache.set(key,out);return out}
+function memberPairSnapshot(id,pk){const keys=recentPeriods(pk,8),rows=keys.map(k=>{const maps=pairingMaps(k),sid=String(id);return{k,left:Number(maps.left.get(sid)||0),right:Number(maps.right.get(sid)||0)}}),cur=rows.at(-1)||{left:0,right:0},big=Math.max(cur.left,cur.right),small=Math.min(cur.left,cur.right),completion=Math.min(100,Math.round(small/300000*100)),qualifiedCount=rows.filter(x=>x.left>=300000&&x.right>=300000).length,nearCount=rows.filter(x=>Math.max(x.left,x.right)>=300000&&Math.min(x.left,x.right)>=100000).length;return{keys,rows,left:cur.left,right:cur.right,big,small,completion,qualifiedCount,nearCount}}
+function parentNodeLabel(id,leaderId){const p=graph.parentMap.get(String(id))?.parent||'';if(!p||p===String(leaderId))return p?'領袖直接下層':'—';const m=graph.memberMap.get(p);return m?.name&&m.name!=='XXX'?m.name:p}
+function operatorAction(cat){if(cat==='已達標')return'左右皆達30萬，可自然詢問這期是否有領到獎金，再確認目前實際經營狀態';if(cat==='高機會')return'大邊已達30萬、小邊超過20萬；很接近對碰，適合主動了解目前卡在哪裡';if(cat==='逼近對碰')return'大邊已達30萬、小邊超過10萬；已有明顯雙邊動能，可用另一邊也開始有量作為聯繫理由';return'大邊已達30萬、小邊已有5萬以上；屬早期組織雛形，先確認真正帶動者與目前意願'}
+function operatorCandidateForMember(id,leaderId){id=String(id);const m=graph.memberMap.get(id);if(!m||!m.active||m.name==='XXX')return null;if((dataset.leaders||[]).some(x=>String(x.member)===id))return null;const pair=memberPairSnapshot(id,selectedPeriod),buy=memberPurchaseSnapshot(id,selectedPeriod),st=directSideState(id),cum=Number(m.cumulativePv||0),tags=[];let priority=0,category='';if(pair.left>=300000&&pair.right>=300000){category='已達標';priority=190;tags.push('雙邊30萬')}else if(pair.big>=300000&&pair.small>=200000){category='高機會';priority=165;tags.push('30萬＋20萬')}else if(pair.big>=300000&&pair.small>=100000){category='逼近對碰';priority=145;tags.push('30萬＋10萬')}else if(pair.big>=300000&&pair.small>=50000){category='早期觀察';priority=120;tags.push('30萬＋5萬')}else return null;tags.push(`小邊完成 ${pair.completion}%`);if(pair.qualifiedCount>=2){tags.push(`近8期達標 ${pair.qualifiedCount}期`);priority+=35+pair.qualifiedCount*2}else if(pair.nearCount>=2){tags.push(`近8期多次逼近 ${pair.nearCount}期`);priority+=20}if(st.both)tags.push('已開雙線');else if(st.one)tags.push('已有單線');if(buy.activeCount>=4)tags.push(`本人回購 ${buy.activeCount}/8`);priority+=Math.min(25,pair.small/10000)+Math.min(15,pair.big/100000);return{radar:'operator',member:id,name:m.name||id,cumulativePv:cum,structure:st.label,parent:parentNodeLabel(id,leaderId),purchase:buy,pair,tags:[...new Set(tags)],priority,category,action:operatorAction(category)}}
+function consumerAction(cat){if(cat==='沉睡回訪')return'前幾期有規律購買、最近兩期停止；先關心使用狀況與停止原因，不急著推銷';if(cat==='購買放大')return'本期購買明顯放大；先確認是真實消費、家庭合購、代買或配置帳號，再決定後續';if(cat==='消費升溫')return'最近4期購買頻率比前4期明顯增加，適合了解最近常用產品與需求變化';if(cat==='回流會員')return'中斷後重新購買，適合詢問重新使用的原因與接下來需要什麼';if(cat==='本期高消費')return'本期購買金額明顯，先了解這次主要買了什麼、是否為本人或家庭實際使用，再判斷後續服務重點';if(cat==='本期購買')return'本期已有購買紀錄；先從產品使用與需求開始建立關係，不因未達演算法門檻就忽略';return'購買習慣穩定，適合持續服務、了解產品偏好與是否曾主動分享給身邊的人'}
+function consumerCandidateForMember(id,leaderId){id=String(id);const m=graph.memberMap.get(id);if(!m||!m.active||m.name==='XXX')return null;const buy=memberPurchaseSnapshot(id,selectedPeriod),st=directSideState(id),cum=Number(m.cumulativePv||0),tags=[];let priority=0,category='',isTrackedLeader=(dataset.leaders||[]).some(x=>String(x.member)===id),priorActive=buy.values.slice(0,-1).filter(v=>v>0).length;if(buy.dormant){category='沉睡回訪';priority=120;tags.push('近2期未購買',`先前購買 ${buy.activeCount}/8`)}if(buy.currentPv>0){category=category||'本期購買';priority=Math.max(priority,75);tags.push(`本期 ${formatPv(buy.currentPv)}`,`近8期購買 ${buy.activeCount}/8`);if(priorActive===0)tags.push('近8期本期首次出現');if(buy.largeOrder||buy.relativeSpike){category='購買放大';priority=Math.max(priority,180);if(buy.currentPv>=300000)tags.push('本期30萬級大單');else if(buy.currentPv>=100000)tags.push(`本期大單 ${formatPv(buy.currentPv)}`);if(buy.relativeSpike&&buy.spikeMultiple)tags.push(`約為平常 ${buy.spikeMultiple.toFixed(1)}倍`);priority+=20}else if(buy.frequencyUp){category='消費升溫';priority=Math.max(priority,165)}else if(buy.comeback){category='回流會員';priority=Math.max(priority,150)}else if(buy.stableRepeat||buy.activeCount>=3){category='穩定回購';priority=Math.max(priority,140)}else if(buy.currentPv>=50000){category='本期高消費';priority=Math.max(priority,130)}}if(!category)return null;if(buy.frequencyUp){tags.push(`頻率 ${buy.prior4Active}/4 → ${buy.recent4Active}/4`);priority+=25}if(buy.comeback){tags.push('停2期後回流');priority+=18}if(buy.stableRepeat){tags.push(`穩定回購 ${buy.activeCount}/8`);priority+=20+buy.activeCount*3}else if(buy.activeCount>=3){tags.push(`重複購買 ${buy.activeCount}/8`);priority+=10}if(buy.currentPv>=50000&&buy.currentPv<100000)tags.push('本期5萬以上');if(buy.currentPv>0)priority+=Math.min(35,buy.currentPv/10000);if(st.both)tags.push('已開雙線');else if(st.one)tags.push('已有單線');if(isTrackedLeader){tags.push('已追蹤領袖');priority-=15}priority+=Math.min(15,cum/50000);return{radar:'consumer',member:id,name:m.name||id,cumulativePv:cum,structure:st.label,parent:parentNodeLabel(id,leaderId),purchase:buy,tags:[...new Set(tags)],priority,category,action:consumerAction(category),isTrackedLeader}}
+function exclusionKey(leader,member,radar='global'){return`${leader}:${radar}:${member}`}function legacyExclusionKey(leader,member){return`${leader}:${member}`}function isExcluded(leader,member,radar){return!!exclusions[exclusionKey(leader,member,radar)]||!!exclusions[legacyExclusionKey(leader,member)]}
+function sideCandidates(leaderId,side){const sets=descendantsBySide(leaderId),arr=[];for(const id of sets[side]){const c=selectedRadar==='operator'?operatorCandidateForMember(id,leaderId):consumerCandidateForMember(id,leaderId);if(c&&!isExcluded(leaderId,c.member,selectedRadar))arr.push(c)}return arr.sort((a,b)=>b.priority-a.priority||b.purchase.activeCount-a.purchase.activeCount||b.cumulativePv-a.cumulativePv)}
+function purchaseHistoryHtml(c){return`<div class="historyStrip">${c.purchase.keys.map((k,i)=>{const v=c.purchase.values[i];return`<div class="historyCell ${v>0?'active':''}"><b>${esc(shortPeriod(k))}</b><span>${v>0?esc(formatPv(v)):'—'}</span></div>`}).join('')}</div>`}
+function pairHistoryHtml(c){return`<div class="pairHistoryStrip">${c.pair.rows.map(x=>{const small=Math.min(x.left,x.right),pct=Math.min(100,Math.round(small/300000*100)),cls=x.left>=300000&&x.right>=300000?'hit':Math.max(x.left,x.right)>=300000&&small>=100000?'near':'';return`<div class="pairCell ${cls}"><b>${esc(shortPeriod(x.k))}</b><span>左 ${esc(formatPv(x.left))}</span><span>右 ${esc(formatPv(x.right))}</span><em>${x.left>=300000&&x.right>=300000?'達標':`${pct}%`}</em></div>`}).join('')}</div>`}
+function candidateCard(c){const crm=crmStore[c.member],f=crm?followState(crm):null,extra=selectedRadar==='operator'?`<span>左 <b>${formatPv(c.pair.left)}</b></span><span>右 <b>${formatPv(c.pair.right)}</b></span><span>小邊 <b>${c.pair.completion}%</b></span>`:`<span>本期 <b>${formatPv(c.purchase.currentPv)}</b></span><span>近4期 <b>${c.purchase.recent4Active}/4</b></span><span>前4期 <b>${c.purchase.prior4Active}/4</b></span>`;return`<article class="candidateCard ${esc(selectedRadar)}"><div class="candidateTop"><div><h3><button class="personLink" data-member="${esc(c.member)}">${esc(c.name)}</button></h3><small>${esc(c.member)} · 上層 ${esc(c.parent)}</small></div><div class="tagRow"><span class="tag category ${esc(selectedRadar)}">${esc(c.category)}</span>${c.tags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></div><div class="facts">${extra}${selectedRadar==='operator'?growthCardFacts(c.member):''}<span>累積PV <b>${formatPv(c.cumulativePv)}</b></span>${crm?`<span><b>${esc(crm.status)}</b> · ${esc(f.label)}</span>`:''}</div>${selectedRadar==='operator'?pairHistoryHtml(c):purchaseHistoryHtml(c)}<div class="actionText">${esc(c.action)}</div><div class="cardActions"><button class="manageBtn" data-member="${esc(c.member)}">查看走勢與追蹤</button><button class="skipBtn" data-skip="${esc(c.member)}">不列前排</button></div></article>`}
+function renderCandidates(){const arr=sideCandidates(selectedLeader,selectedSide),shown=arr.slice(0,Math.max(6,visibleLimit));$('candidateList').innerHTML=shown.length?shown.map(candidateCard).join(''):'<div class="emptyMini">目前沒有可顯示的會員。</div>';const btn=$('toggleMoreBtn'),remain=Math.max(0,arr.length-shown.length);if(remain>0){btn.classList.remove('hidden');const step=Math.min(visibleLimit===6?14:20,remain);btn.textContent=`再顯示 ${step} 人`;btn.dataset.step=String(step)}else if(visibleLimit>6){btn.classList.remove('hidden');btn.textContent='收合回前6名';btn.dataset.step='0'}else btn.classList.add('hidden');const sideSet=descendantsBySide(selectedLeader)[selectedSide],ex=Object.values(exclusions).filter(x=>String(x.leaderId)===String(selectedLeader)&&sideSet.has(String(x.member))&&(!x.radar||x.radar===selectedRadar));$('excludedDetails').classList.toggle('hidden',!ex.length);$('excludedList').innerHTML=ex.map(x=>`<div class="excludedRow"><div><b>${esc(graph.memberMap.get(String(x.member))?.name||x.member)}</b><small>${esc(x.reason||'暫不追蹤')}</small></div><button data-restore="${esc(x.member)}">恢復</button></div>`).join('');document.querySelectorAll('[data-member]').forEach(b=>b.onclick=()=>openMember(b.dataset.member));document.querySelectorAll('[data-skip]').forEach(b=>b.onclick=()=>skipCandidate(b.dataset.skip));document.querySelectorAll('[data-restore]').forEach(b=>b.onclick=()=>restoreCandidate(b.dataset.restore))}
+async function skipCandidate(member){const reason=prompt('為什麼不需要放在這個雷達前列？\n例如：自用帳號、配置帳號、已有人負責、暫不追蹤','自用／配置帳號');if(reason===null)return;exclusions[exclusionKey(selectedLeader,member,selectedRadar)]={leaderId:selectedLeader,member:String(member),radar:selectedRadar,reason:String(reason||'暫不追蹤'),excludedAt:nowIso()};await dbSet('exclusions',exclusions);renderCandidates();toast('已排除，下一位會自動補上')}
+async function restoreCandidate(member){delete exclusions[exclusionKey(selectedLeader,member,selectedRadar)];delete exclusions[legacyExclusionKey(selectedLeader,member)];await dbSet('exclusions',exclusions);renderCandidates();toast('已恢復推薦')}
+function sideStats(leaderId,side,pk){const set=descendantsBySide(leaderId)[side],raw=dataset.salesHistory?.[pk]||[];if(String(leaderId)===String(dataset.organization.rootId)&&raw.length&&raw.every(r=>r.sourceSide==='左'||r.sourceSide==='右')){const source=side==='L'?'左':'右',rows=raw.filter(r=>r.sourceSide===source),pv=rows.reduce((sum,r)=>sum+Number(r.pv||0),0),buyers=new Set(rows.map(r=>String(r.member))).size;return{pv,buyers,set}}const agg=salesIndex.perPeriod.get(pk)||new Map();let pv=0,buyers=0;for(const[id,x]of agg)if(set.has(id)){pv+=x.pv;buyers++}return{pv,buyers,set}}
+function newCount(set,pk){let n=0;for(const id of set){const m=graph.memberMap.get(id);if(m?.joinDate&&periodKey(m.joinDate)===pk)n++}return n}
+function leaderSummary(){const sets=descendantsBySide(selectedLeader),l=sideStats(selectedLeader,'L',selectedPeriod),r=sideStats(selectedLeader,'R',selectedPeriod),self=Number(salesIndex.perPeriod.get(selectedPeriod)?.get(selectedLeader)?.pv||0),total=l.pv+r.pv+self;return{total,left:l.pv,right:r.pv,leftNew:newCount(sets.L,selectedPeriod),rightNew:newCount(sets.R,selectedPeriod),leftBuyers:l.buyers,rightBuyers:r.buyers}}
+function currentLeaderName(){const x=(dataset?.leaders||[]).find(x=>String(x.member)===String(selectedLeader)),m=graph?.memberMap.get(String(selectedLeader));return x?.name||m?.name||selectedLeader}
+
+function renderControls(){const ls=(dataset.leaders||[]).filter(x=>graph.memberMap.has(String(x.member)));$('leaderSelect').innerHTML=ls.map(x=>`<option value="${esc(x.member)}">${esc(x.name||graph.memberMap.get(String(x.member))?.name||x.member)}</option>`).join('');$('leaderSelect').value=selectedLeader;const keys=Object.keys(dataset.salesHistory||{}).sort().reverse();$('periodSelect').innerHTML=keys.map(k=>`<option value="${esc(k)}">${esc(periodLabel(k))}</option>`).join('');$('periodSelect').value=selectedPeriod}
+function renderSummary(){if(nativeMode&&!Object.prototype.hasOwnProperty.call(dataset.salesHistory||{},selectedPeriod)){$('summary').innerHTML='<div class="summaryBox wide"><span>組織已載入</span><strong>尚無業績快照</strong><small>請到資料更新讀取購買明細</small></div>';return}const s=leaderSummary(),growth=nativeMode?memberGrowthSnapshot(selectedLeader,[selectedPeriod]):null;$('summary').innerHTML=`<div class="summaryBox wide"><span>${esc(currentLeaderName())} · ${esc(periodLabel(selectedPeriod))}</span><strong>${formatPv(s.total)} PV</strong><small>本期組織業績</small></div><div class="summaryBox"><span>左線 PV</span><strong>${formatPv(s.left)}</strong><small>${s.leftBuyers} 位購買</small></div><div class="summaryBox"><span>右線 PV</span><strong>${formatPv(s.right)}</strong><small>${s.rightBuyers} 位購買</small></div><div class="summaryBox"><span>左線新人</span><strong>${growth?growthNumber(growth.rows[0].left,growth.unknown.L||growth.partial):s.leftNew}</strong><small>本期加入</small></div><div class="summaryBox"><span>右線新人</span><strong>${growth?growthNumber(growth.rows[0].right,growth.unknown.R||growth.partial):s.rightNew}</strong><small>本期加入</small></div>`}
+function renderFollow(){const rows=Object.values(crmStore).map(r=>cleanCrmRecord(r,r.member)).filter(r=>{const id=String(r.member),sets=descendantsBySide(selectedLeader);return id===selectedLeader||sets.L.has(id)||sets.R.has(id)}).sort((a,b)=>{const ra={overdue:0,today:1,week:2,future:3,none:4}[followState(a).key],rb={overdue:0,today:1,week:2,future:3,none:4}[followState(b).key];return ra-rb||String(a.nextContact||'9999').localeCompare(String(b.nextContact||'9999'))});const overdue=rows.filter(r=>followState(r).key==='overdue').length,today=rows.filter(r=>followState(r).key==='today').length,week=rows.filter(r=>['today','week'].includes(followState(r).key)).length;$('followMetrics').innerHTML=`<div class="followMetric"><strong>${overdue}</strong><span>已逾期</span></div><div class="followMetric"><strong>${today}</strong><span>今天</span></div><div class="followMetric"><strong>${week}</strong><span>7天內</span></div>`;$('followList').innerHTML=rows.length?rows.slice(0,12).map(r=>{const f=followState(r);return`<div class="followRow" data-follow-member="${esc(r.member)}"><div><h4>${esc(r.name||graph.memberMap.get(String(r.member))?.name||r.member)}</h4><small>${esc(r.owner?`負責：${r.owner}`:'尚未指定負責人')} · ${esc(r.status)}</small></div><span class="followState ${esc(f.key)}">${esc(f.label)}</span></div>`}).join(''):'<div class="emptyMini">還沒有建立追蹤資料。</div>';document.querySelectorAll('[data-follow-member]').forEach(x=>x.onclick=()=>openMember(x.dataset.followMember))}
+function renderDataInfo(){$('dataInfo').innerHTML=dataset?`<b>${esc(dataset.tool)}</b><br>${esc(dataset.exportedAt?`來源匯出：${dataset.exportedAt}`:'')}<br>${fmt.format(dataset.organization.members.length)} 個組織節點 · ${Object.keys(dataset.salesHistory).length} 期業績 · ${Object.keys(crmStore).length} 筆 CRM`:'尚未載入資料'}
+function renderAll(){if(!dataset){$('emptyView').classList.remove('hidden');$('mainView').classList.add('hidden');renderDataInfo();renderSnapshotBanner();return}$('emptyView').classList.add('hidden');$('mainView').classList.remove('hidden');renderControls();renderSummary();renderCandidates();renderFollow();renderBusinessDashboard();renderDataInfo();renderSnapshotBanner()}
+
+function memberCandidate(id){return selectedRadar==='operator'?operatorCandidateForMember(String(id),selectedLeader):consumerCandidateForMember(String(id),selectedLeader)}
+function openMember(id){currentMember=String(id);const m=graph.memberMap.get(currentMember),op=operatorCandidateForMember(currentMember,selectedLeader),co=consumerCandidateForMember(currentMember,selectedLeader),r=cleanCrmRecord(crmStore[currentMember]||{member:currentMember,name:m?.name||''},currentMember);$('memberTitle').textContent=m?.name&&m.name!=='XXX'?m.name:currentMember;$('memberMeta').textContent=`${currentMember} · 累積PV ${formatPv(m?.cumulativePv)} · ${directSideState(currentMember).label}`;$('memberSignals').innerHTML=(op||co)?`${op?`<span class="tag category operator">${esc(op.category)}</span>${op.tags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}`:''}${co?`<span class="tag category consumer">${esc(co.category)}</span>${co.tags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}`:''}`:'<span class="tag">手動管理</span>';const pair=memberPairSnapshot(currentMember,selectedPeriod);$('memberPairHistory').innerHTML=`<h3>近8期左右線對碰進度</h3><div class="pairHistoryStrip">${pair.rows.map(x=>{const sm=Math.min(x.left,x.right),pct=Math.min(100,Math.round(sm/300000*100)),cls=x.left>=300000&&x.right>=300000?'hit':Math.max(x.left,x.right)>=300000&&sm>=100000?'near':'';return`<div class="pairCell ${cls}"><b>${esc(shortPeriod(x.k))}</b><span>左 ${esc(formatPv(x.left))}</span><span>右 ${esc(formatPv(x.right))}</span><em>${x.left>=300000&&x.right>=300000?'達標':`${pct}%`}</em></div>`}).join('')}</div>`;const snap=memberPurchaseSnapshot(currentMember,selectedPeriod);$('memberPurchaseHistory').innerHTML=`<h3>近8期購買紀錄</h3><div class="historyStrip">${snap.keys.map((k,i)=>`<div class="historyCell ${snap.values[i]>0?'active':''}"><b>${esc(shortPeriod(k))}</b><span>${snap.values[i]>0?esc(formatPv(snap.values[i])):'—'}</span></div>`).join('')}</div>`;$('crmPhone').value=r.phone;$('crmContact').value=r.contact;$('crmActualConsumer').value=r.actualConsumer;$('crmOwner').value=r.owner;$('crmStatus').value=r.status;$('crmCycle').value=String(r.cycleDays);if(![...$('crmCycle').options].some(o=>o.value===String(r.cycleDays)))$('crmCycle').value='0';$('crmLast').value=r.lastContact;$('crmNext').value=r.nextContact;$('crmNote').value=r.note;$('logDate').value=localDateStr();$('logNote').value='';renderLogs(r);updateCallBtn(r.phone);renderNativeMemberCharts(currentMember);if(String(currentMember).startsWith('prospect:')){const details=document.querySelector('.crmDetails');if(details)details.open=true}$('memberSheet').classList.remove('hidden')}
+function closeMember(){$('memberSheet').classList.add('hidden');currentMember=''}
+function readMemberForm(){const old=cleanCrmRecord(crmStore[currentMember]||{},currentMember),m=graph.memberMap.get(currentMember);return{...old,member:currentMember,name:m?.name&&m.name!=='XXX'?m.name:(old.name||currentMember),phone:$('crmPhone').value.trim(),contact:$('crmContact').value.trim(),actualConsumer:$('crmActualConsumer').value.trim(),owner:$('crmOwner').value.trim(),status:$('crmStatus').value,cycleDays:Number($('crmCycle').value||0),lastContact:$('crmLast').value,nextContact:$('crmNext').value,note:$('crmNote').value.trim(),updatedAt:nowIso()}}
+async function saveMember(close=true){if(!currentMember)return;crmStore[currentMember]=readMemberForm();await dbSet('crm',crmStore);renderCandidates();renderFollow();if(close)closeMember();toast('已儲存')}
+function renderLogs(r){const logs=[...(r.logs||[])].sort((a,b)=>String(b.date).localeCompare(String(a.date))||String(b.createdAt).localeCompare(String(a.createdAt)));$('logHistory').innerHTML=logs.length?logs.map(x=>`<div class="logRow"><div><strong>${esc(x.date||'—')}</strong><span>${esc(x.channel||'聯繫')}</span></div><p>${esc(x.note||'已聯繫')}</p></div>`).join(''):'<div class="emptyMini">尚未留下聯繫紀錄。</div>'}
+async function addLog(){if(!currentMember)return;let r=readMemberForm(),date=$('logDate').value||localDateStr();r.logs=[...(r.logs||[]),{date,channel:$('logChannel').value,note:$('logNote').value.trim(),createdAt:nowIso()}];r.lastContact=date;if(Number(r.cycleDays)>0)r.nextContact=addDaysStr(date,r.cycleDays);crmStore[currentMember]=r;await dbSet('crm',crmStore);$('crmLast').value=r.lastContact;$('crmNext').value=r.nextContact;$('logNote').value='';renderLogs(r);renderFollow();renderCandidates();toast('已記錄聯繫')}
+function updateCallBtn(phone){const a=$('callBtn');if(phone){a.href=`tel:${encodeURIComponent(phone.replace(/\s/g,''))}`;a.classList.remove('hidden')}else a.classList.add('hidden')}
+
+function openDataSheet(){$('dataSheet').classList.remove('hidden');renderDataInfo()}function closeDataSheet(){$('dataSheet').classList.add('hidden')}
+function exportBackup(){if(!dataset){alert('目前沒有資料');return}const out={tool:'Atomy 行動戰情單機備份',version:'0.3.0',exportedAt:nowIso(),sourceTool:dataset.tool,leader:dataset.leader||null,leaders:dataset.leaders,organization:dataset.organization,salesHistory:dataset.salesHistory,crmStore,candidateExclusions:exclusions,privacy:{containsCrm:true,note:'本檔可能包含電話、聯絡方式、備註與聯繫紀錄'}};downloadJson(out,`atomy-mobile-backup-${currentLeaderName().replace(/[\\/:*?"<>|]/g,'-')}-${localDateStr()}.json`)}
+async function clearAll(){if(!confirm('確定清除這支手機上的組織、業績、CRM與排除設定？請先匯出備份。'))return;await dbClear();dataset=null;crmStore={};exclusions={};graph=null;salesIndex=null;renderAll();closeDataSheet();toast('已清除本機資料')}
+
+
+/* ===== v0.4.7 rebuilt overrides ===== */
+function cleanCrmRecord(r,id){r=r&&typeof r==='object'?r:{};return{member:String(id||r.member||''),name:String(r.name||''),phone:String(r.phone||''),contact:String(r.contact||''),actualConsumer:String(r.actualConsumer||''),owner:String(r.owner||''),status:String(r.status||'觀察中'),cycleDays:Number(r.cycleDays??14)||0,lastContact:String(r.lastContact||''),nextContact:String(r.nextContact||''),note:String(r.note||''),source:String(r.source||''),leaderMember:String(r.leaderMember||''),prospect:Boolean(r.prospect||String(id||r.member||'').startsWith('prospect:')),archived:Boolean(r.archived),logs:Array.isArray(r.logs)?r.logs.map((x,i)=>({id:String(x.id||x.createdAt||`${x.date||''}-${i}`),date:String(x.date||''),channel:String(x.channel||''),note:String(x.note||''),createdAt:String(x.createdAt||'')})):[],createdAt:String(r.createdAt||nowIso()),updatedAt:String(r.updatedAt||nowIso())}}
+function recordBelongsToLeader(r){if(r.leaderMember)return String(r.leaderMember)===String(selectedLeader);if(r.prospect)return true;const id=String(r.member),sets=descendantsBySide(selectedLeader);return id===selectedLeader||sets.L.has(id)||sets.R.has(id)}
+function renderFollow(){const all=Object.values(crmStore).map(r=>cleanCrmRecord(r,r.member)).filter(recordBelongsToLeader),rows=all.filter(r=>!r.archived).sort((a,b)=>{const ra={overdue:0,today:1,week:2,future:3,none:4}[followState(a).key],rb={overdue:0,today:1,week:2,future:3,none:4}[followState(b).key];return ra-rb||String(a.nextContact||'9999').localeCompare(String(b.nextContact||'9999'))}),archived=all.filter(r=>r.archived);const overdue=rows.filter(r=>followState(r).key==='overdue').length,today=rows.filter(r=>followState(r).key==='today').length,week=rows.filter(r=>['today','week'].includes(followState(r).key)).length;$('followMetrics').innerHTML=`<div class="followMetric"><strong>${overdue}</strong><span>已逾期</span></div><div class="followMetric"><strong>${today}</strong><span>今天</span></div><div class="followMetric"><strong>${week}</strong><span>7天內</span></div>`;$('followList').innerHTML=rows.length?rows.map(r=>{const f=followState(r),m=graph?.memberMap?.get(String(r.member));return`<div class="followRow" data-follow-member="${esc(r.member)}"><div><h4>${esc(r.name||m?.name||r.member)} ${r.prospect?'<span class="prospectBadge">潛在會員</span>':''}</h4><small>${esc(r.owner?`負責：${r.owner}`:'尚未指定負責人')} · ${esc(r.status)}</small><div class="inlineMeta">${r.source?`<span>${esc(r.source)}</span>`:''}${r.contact?`<span>${esc(r.contact)}</span>`:''}</div></div><span class="followState ${esc(f.key)}">${esc(f.label)}</span></div>`}).join(''):'<div class="emptyMini">還沒有建立追蹤資料。</div>';document.querySelectorAll('[data-follow-member]').forEach(x=>x.onclick=()=>openMember(x.dataset.followMember));$('archiveDetails').classList.toggle('hidden',archived.length===0);$('archiveSummary').textContent=`已停止追蹤（${archived.length}）`;$('archiveList').innerHTML=archived.map(r=>`<div class="archiveRow"><strong>${esc(r.name||r.member)}</strong><small>${esc(r.prospect?'潛在會員':r.member)} · ${esc(r.status)}</small><div class="archiveActions"><button data-restore="${esc(r.member)}">恢復</button><button data-delete-crm="${esc(r.member)}">刪除資料</button></div></div>`).join('');document.querySelectorAll('[data-restore]').forEach(b=>b.onclick=()=>restoreFollow(b.dataset.restore));document.querySelectorAll('[data-delete-crm]').forEach(b=>b.onclick=()=>deleteCrm(b.dataset.deleteCrm));renderCareList()}
+function openMember(id){currentMember=String(id);const m=graph?.memberMap?.get(currentMember),r=cleanCrmRecord(crmStore[currentMember]||{member:currentMember,name:m?.name||'',leaderMember:selectedLeader},currentMember),isProspect=r.prospect||currentMember.startsWith('prospect:');let op=null,co=null;if(!isProspect&&graph){try{op=operatorCandidateForMember(currentMember,selectedLeader);co=consumerCandidateForMember(currentMember,selectedLeader)}catch(e){}}$('memberTitle').textContent=r.name||(m?.name&&m.name!=='XXX'?m.name:currentMember);$('memberMeta').textContent=isProspect?'尚未入會 · 潛在會員':`${currentMember} · 累積PV ${formatPv(m?.cumulativePv)} · ${directSideState(currentMember).label}`;$('memberSignals').innerHTML=isProspect?'<span class="prospectBadge">潛在會員</span>':((op||co)?`${op?`<span class="tag category operator">${esc(op.category)}</span>${op.tags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}`:''}${co?`<span class="tag category consumer">${esc(co.category)}</span>${co.tags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}`:''}`:'<span class="tag">手動管理</span>');if(isProspect){$('memberPairHistory').classList.add('hidden');$('memberPurchaseHistory').classList.add('hidden');$('prospectConvert').classList.remove('hidden')}else{$('memberPairHistory').classList.remove('hidden');$('memberPurchaseHistory').classList.remove('hidden');$('prospectConvert').classList.add('hidden');const pair=memberPairSnapshot(currentMember,selectedPeriod);$('memberPairHistory').innerHTML=`<h3>近8期左右線對碰進度</h3><div class="pairHistoryStrip">${pair.rows.map(x=>{const sm=Math.min(x.left,x.right),pct=Math.min(100,Math.round(sm/300000*100)),cls=x.left>=300000&&x.right>=300000?'hit':Math.max(x.left,x.right)>=300000&&sm>=100000?'near':'';return`<div class="pairCell ${cls}"><b>${esc(shortPeriod(x.k))}</b><span>左 ${esc(formatPv(x.left))}</span><span>右 ${esc(formatPv(x.right))}</span><em>${x.left>=300000&&x.right>=300000?'達標':`${pct}%`}</em></div>`}).join('')}</div>`;const snap=memberPurchaseSnapshot(currentMember,selectedPeriod);$('memberPurchaseHistory').innerHTML=`<h3>近8期購買紀錄</h3><div class="historyStrip">${snap.keys.map((k,i)=>`<div class="historyCell ${snap.values[i]>0?'active':''}"><b>${esc(shortPeriod(k))}</b><span>${snap.values[i]>0?esc(formatPv(snap.values[i])):'—'}</span></div>`).join('')}</div>`}$('crmPhone').value=r.phone;$('crmContact').value=r.contact;$('crmActualConsumer').value=r.actualConsumer;$('crmOwner').value=r.owner;$('crmStatus').value=r.status;if(![...$('crmStatus').options].some(o=>o.value===r.status)){const o=document.createElement('option');o.textContent=r.status;$('crmStatus').appendChild(o);$('crmStatus').value=r.status}$('crmCycle').value=String(r.cycleDays);if(![...$('crmCycle').options].some(o=>o.value===String(r.cycleDays)))$('crmCycle').value='0';$('crmLast').value=r.lastContact;$('crmNext').value=r.nextContact;$('crmNote').value=r.note;$('logDate').value=localDateStr();$('logNote').value='';editingLogId='';renderLogs(r);updateCallBtn(r.phone);$('stopFollowBtn').textContent=r.archived?'恢復追蹤':'停止追蹤';renderNativeMemberCharts(currentMember);const details=document.querySelector('.crmDetails');if(details)details.open=String(currentMember).startsWith('prospect:');$('memberSheet').classList.remove('hidden')}
+function readMemberForm(){const old=cleanCrmRecord(crmStore[currentMember]||{},currentMember),m=graph?.memberMap?.get(currentMember);return{...old,member:currentMember,name:old.name||(m?.name&&m.name!=='XXX'?m.name:currentMember),phone:$('crmPhone').value.trim(),contact:$('crmContact').value.trim(),actualConsumer:$('crmActualConsumer').value.trim(),owner:$('crmOwner').value.trim(),status:$('crmStatus').value,cycleDays:Number($('crmCycle').value||0),lastContact:$('crmLast').value,nextContact:$('crmNext').value,note:$('crmNote').value.trim(),leaderMember:old.leaderMember||selectedLeader,updatedAt:nowIso()}}
+function renderLogs(r){const logs=[...(r.logs||[])].sort((a,b)=>String(b.date).localeCompare(String(a.date))||String(b.createdAt).localeCompare(String(a.createdAt)));$('logHistory').innerHTML=logs.length?logs.map(x=>`<div class="logRow"><div><strong>${esc(x.date||'—')}</strong><span>${esc(x.channel||'聯繫')}</span></div><p>${esc(x.note||'已聯繫')}</p><div class="logActions"><button data-edit-log="${esc(x.id||x.createdAt)}">修改</button><button data-delete-log="${esc(x.id||x.createdAt)}">刪除</button></div></div>`).join(''):'<div class="emptyMini">尚未留下聯繫紀錄。</div>';document.querySelectorAll('[data-edit-log]').forEach(b=>b.onclick=()=>editLog(b.dataset.editLog));document.querySelectorAll('[data-delete-log]').forEach(b=>b.onclick=()=>deleteLog(b.dataset.deleteLog))}
+async function addLog(){if(!currentMember)return;let r=readMemberForm(),date=$('logDate').value||localDateStr(),note=$('logNote').value.trim(),channel=$('logChannel').value;if(editingLogId){r.logs=(r.logs||[]).map(x=>String(x.id||x.createdAt)===editingLogId?{...x,date,channel,note}:x);editingLogId='';$('addLogBtn').textContent='記錄'}else{const createdAt=nowIso();r.logs=[...(r.logs||[]),{id:createdAt,date,channel,note,createdAt}]}r.lastContact=date;if(Number(r.cycleDays)>0)r.nextContact=addDaysStr(date,r.cycleDays);crmStore[currentMember]=r;await dbSet('crm',crmStore);$('crmLast').value=r.lastContact;$('crmNext').value=r.nextContact;$('logNote').value='';renderLogs(r);renderFollow();renderCandidates();toast('已儲存聯繫紀錄')}
+async function editLog(id){const r=readMemberForm(),x=(r.logs||[]).find(z=>String(z.id||z.createdAt)===String(id));if(!x)return;editingLogId=String(id);$('logDate').value=x.date||localDateStr();$('logChannel').value=x.channel||'LINE';$('logNote').value=x.note||'';$('addLogBtn').textContent='儲存修改';$('logNote').focus()}
+async function deleteLog(id){if(!confirm('確定刪除這筆聯繫紀錄？'))return;let r=readMemberForm();r.logs=(r.logs||[]).filter(z=>String(z.id||z.createdAt)!==String(id));crmStore[currentMember]=r;await dbSet('crm',crmStore);renderLogs(r);renderFollow();toast('已刪除聯繫紀錄')}
+function exportBackup(){if(!dataset){alert('目前沒有資料');return}const out={tool:'Atomy 行動戰情 v0.4.7 完整備份',version:'0.4.7',exportedAt:nowIso(),sourceTool:dataset.tool,leader:dataset.leader||null,leaders:dataset.leaders,organization:dataset.organization,salesHistory:dataset.salesHistory,crmStore,candidateExclusions:exclusions,privacy:{containsCrm:true,note:'本檔可能包含電話、聯絡方式、備註與聯繫紀錄'}};downloadJson(out,`atomy-mobile-backup-${currentLeaderName().replace(/[\\/:*?"<>|]/g,'-')}-${localDateStr()}.json`)}
+function openManual(){if(!dataset){alert('請先更新組織資料');return}$('manualSearch').value='';$('manualMemberNo').value='';$('manualName').value='';$('manualPhone').value='';$('manualContact').value='';$('manualSource').value='';$('manualStatus').value='剛認識';$('manualNext').value='';$('manualNote').value='';$('manualSearchResults').classList.add('hidden');$('manualSheet').classList.remove('hidden')}
+function closeManual(){$('manualSheet').classList.add('hidden')}
+function searchManualMembers(q){q=String(q||'').trim().toLowerCase();if(!q||!graph){$('manualSearchResults').classList.add('hidden');return}const arr=[];for(const m of graph.memberMap.values()){const id=String(m.member||m.custNo||''),name=String(m.name||m.custNm||'');if((id.toLowerCase().includes(q)||name.toLowerCase().includes(q))&&name!=='XXX'){arr.push({id,name});if(arr.length>=25)break}}$('manualSearchResults').innerHTML=arr.length?arr.map(x=>`<button class="manualSearchItem" data-pick-member="${esc(x.id)}" data-pick-name="${esc(x.name)}"><b>${esc(x.name)}</b><br><small>${esc(x.id)}</small></button>`).join(''):'<div class="emptyMini">找不到，可直接手動新增。</div>';$('manualSearchResults').classList.remove('hidden');document.querySelectorAll('[data-pick-member]').forEach(b=>b.onclick=()=>{$('manualMemberNo').value=b.dataset.pickMember;$('manualName').value=b.dataset.pickName;$('manualSearchResults').classList.add('hidden')})}
+async function saveManual(){let member=$('manualMemberNo').value.trim(),name=$('manualName').value.trim();if(!name&&!member){alert('至少填姓名或會員編號');return}let prospect=!member;if(!member)member=`prospect:${Date.now()}`;const existing=cleanCrmRecord(crmStore[member]||{},member),m=graph?.memberMap?.get(member);crmStore[member]={...existing,member,name:name||(m?.name&&m.name!=='XXX'?m.name:member),phone:$('manualPhone').value.trim(),contact:$('manualContact').value.trim(),source:$('manualSource').value.trim(),status:$('manualStatus').value,nextContact:$('manualNext').value,note:$('manualNote').value.trim(),prospect,archived:false,leaderMember:selectedLeader,updatedAt:nowIso()};await dbSet('crm',crmStore);closeManual();renderFollow();toast(prospect?'已加入潛在會員':'已加入追蹤名單')}
+async function stopOrRestoreCurrent(){if(!currentMember)return;let r=readMemberForm();r.archived=!r.archived;crmStore[currentMember]=r;await dbSet('crm',crmStore);renderFollow();closeMember();toast(r.archived?'已停止追蹤，資料仍保留':'已恢復追蹤')}
+async function restoreFollow(id){let r=cleanCrmRecord(crmStore[id]||{},id);r.archived=false;r.updatedAt=nowIso();crmStore[id]=r;await dbSet('crm',crmStore);renderFollow();toast('已恢復追蹤')}
+async function deleteCrm(id){if(!confirm('確定永久刪除這個人的 CRM、備註與聯繫紀錄？'))return;delete crmStore[id];await dbSet('crm',crmStore);renderFollow();renderCandidates();toast('已刪除 CRM 資料')}
+async function convertProspect(){if(!currentMember)return;const no=$('convertMemberNo').value.trim();if(!no){alert('請輸入正式會員編號');return}if(crmStore[no]&&no!==currentMember&&!confirm('這個會員編號已有 CRM 資料，要合併嗎？'))return;let r=readMemberForm(),target=cleanCrmRecord(crmStore[no]||{},no),m=graph?.memberMap?.get(no);target={...target,...r,member:no,name:(m?.name&&m.name!=='XXX'?m.name:r.name),prospect:false,archived:false,updatedAt:nowIso(),logs:[...(target.logs||[]),...(r.logs||[])]};delete crmStore[currentMember];crmStore[no]=target;await dbSet('crm',crmStore);currentMember=no;$('convertMemberNo').value='';openMember(no);renderFollow();toast('已轉為正式會員')}
+const TOPIC_DICT=['苦瓜','血糖','控糖','糖化血色素','飯後血糖','甜食','飲食','飲食控制','飲食管理','代謝','體態','魚油','EPA','DHA','膽固醇','三酸甘油脂','葉黃素','眼睛','視力','3C','益生菌','腸道','排便','消化','睡眠','免疫','呼吸','喉嚨','過敏','保養','乾燥','敏感','清潔','洗臉','洗髮','頭皮','掉髮','前列腺','夜尿','膠原','關節','鈣','骨骼','咖啡','酵素','維他命','維生素','B群','維C','空氣','淨水','水質','體力','疲勞','壓力','美容','痘痘','油光','體重','運動'];
+function suggestKeywords(text){text=String(text||'');const found=[];for(const k of TOPIC_DICT){if(text.toLowerCase().includes(k.toLowerCase()))found.push(k)}for(const m of text.matchAll(/#([^\s#，。！？、；;:：]{2,14})/g))found.push(m[1]);const prod=text.match(/艾多美[\s　]*([\u4e00-\u9fffA-Za-z0-9＋+\-]{2,14})/);if(prod)found.push(prod[1]);const first=text.split(/\n+/).map(x=>x.trim()).find(x=>x.length>=2&&x.length<=18);if(first&&!/[。！？]/.test(first))found.push(first.replace(/[《》【】「」『』]/g,''));return [...new Set(found)].slice(0,18)}
+function selectedTopicKeywords(){const checked=[...document.querySelectorAll('[data-topic-keyword]:checked')].map(x=>x.value.trim()).filter(Boolean),manual=$('manualKeywords').value.split(/[，,、;；\n]/).map(x=>x.trim()).filter(Boolean);return [...new Set([...checked,...manual])]}
+function renderKeywordChips(){if(!topicKeywords.length){$('keywordWrap').innerHTML='<span class="privacyNote">沒有自動辨識到關鍵字，可直接在上方手動輸入。</span>';return}$('keywordWrap').innerHTML=topicKeywords.map(k=>`<label class="keywordChip"><input type="checkbox" data-topic-keyword value="${esc(k)}" checked>${esc(k)}</label>`).join('')}
+function extractTopic(){topicKeywords=suggestKeywords($('topicPost').value);renderKeywordChips();toast(topicKeywords.length?`找到 ${topicKeywords.length} 個關鍵字`:'請手動補關鍵字')}
+function topicRecordPool(){return Object.values(crmStore).map(r=>cleanCrmRecord(r,r.member)).filter(r=>!r.archived&&recordBelongsToLeader(r))}
+function hitSnippet(text,kw){text=String(text||'');const low=text.toLowerCase(),i=low.indexOf(String(kw).toLowerCase());if(i<0)return'';const a=Math.max(0,i-28),b=Math.min(text.length,i+String(kw).length+38);return`${a>0?'…':''}${text.slice(a,b)}${b<text.length?'…':''}`}
+function scanTopic(){const kws=selectedTopicKeywords();if(!kws.length){alert('請先選擇或輸入至少一個關鍵字');return}topicKeywords=kws;const matches=[];for(const r of topicRecordPool()){const sources=[];if(r.note)sources.push({type:'備註',date:'',text:r.note});for(const l of r.logs||[])if(l.note)sources.push({type:l.channel||'聯繫',date:l.date||'',text:l.note});let hits=[];for(const src of sources){for(const kw of kws){if(String(src.text).toLowerCase().includes(String(kw).toLowerCase()))hits.push({kw,src,snippet:hitSnippet(src.text,kw)})}}if(hits.length)matches.push({r,hits})}topicMatches=matches.sort((a,b)=>b.hits.length-a.hits.length);renderTopicResults()}
+function renderTopicResults(){if(!topicMatches.length){$('topicResults').className='topicEmpty';$('topicResults').innerHTML='沒有找到命中的 CRM 紀錄。';return}$('topicResults').className='';$('topicResults').innerHTML=topicMatches.map(({r,hits})=>{const uniq=[...new Set(hits.map(h=>h.kw))],h=hits[0];return`<div class="topicResult"><h4>${esc(r.name||r.member)} ${r.prospect?'<span class="prospectBadge">潛在會員</span>':''}</h4><small>命中：${uniq.map(x=>`<span class="topicHit">${esc(x)}</span>`).join('、')} ${r.contact?`· ${esc(r.contact)}`:''}</small><div class="topicSnippet">${esc(h.src.date?`${h.src.date} ${h.src.type}：`:h.src.type+'：')}${esc(h.snippet)}</div><div class="cardActions"><button class="manageBtn" data-topic-open="${esc(r.member)}">查看紀錄</button><button class="skipBtn" data-topic-today="${esc(r.member)}">加入今日追蹤</button></div><div class="cardActions"><button class="skipBtn" data-topic-line="${esc(r.member)}">LINE 分享原文</button><button class="manageBtn" data-topic-personal="${esc(r.member)}">轉成個人私訊</button></div></div>`}).join('');document.querySelectorAll('[data-topic-open]').forEach(b=>b.onclick=()=>openMember(b.dataset.topicOpen));document.querySelectorAll('[data-topic-today]').forEach(b=>b.onclick=()=>addToday(b.dataset.topicToday));document.querySelectorAll('[data-topic-line]').forEach(b=>b.onclick=()=>lineShare($('topicPost').value,b.dataset.topicLine));document.querySelectorAll('[data-topic-personal]').forEach(b=>b.onclick=()=>openPersonal(b.dataset.topicPersonal))}
+async function addToday(id){let r=cleanCrmRecord(crmStore[id]||{},id);r.nextContact=localDateStr();r.archived=false;r.updatedAt=nowIso();crmStore[id]=r;await dbSet('crm',crmStore);renderFollow();toast('已加入今日追蹤')}
+function lineShare(text,id){text=String(text||'').trim();if(!text){alert('目前沒有可分享的文字');return}const r=cleanCrmRecord(crmStore[id]||{},id);if(r.contact&&navigator.clipboard)navigator.clipboard.writeText(r.contact).catch(()=>{});window.open(`https://line.me/R/share?text=${encodeURIComponent(text)}`,'_blank')}
+function topicTitle(){const kws=selectedTopicKeywords();if(kws.length)return kws[0];const first=$('topicPost').value.split(/\n+/).map(x=>x.trim()).find(Boolean);return first?first.slice(0,16):'今天分享的內容'}
+function personalTemplate(id,tone){const r=cleanCrmRecord(crmStore[id]||{},id),name=(r.name||'嗨').replace(/\s+/g,' '),topic=topicTitle();if(tone==='brief')return`${name}～我今天剛好分享了「${topic}」的內容，想到之前我們有聊過類似話題。你最近還有在關注嗎？有的話我再傳給你看看～`;if(tone==='familiar')return`${name}～剛剛在群組貼「${topic}」突然想到你 😂 之前不是有聊過這類嗎？你最近還有在注意嗎？有的話我丟給你看看～`;return`${name}～最近還好嗎？\n\n我今天剛好在群組分享一個「${topic}」的內容，看到時突然想到你，因為之前我們好像也聊過相關的話題。\n\n不知道你最近還有沒有在關注這方面？如果有的話，我再把資料傳給你看看，不急 😊`}
+function openPersonal(id){personalTarget=id;const r=cleanCrmRecord(crmStore[id]||{},id);$('personalMeta').textContent=`${r.name||id}${r.contact?` · ${r.contact}`:''}`;document.querySelectorAll('#toneTabs button').forEach(b=>b.classList.toggle('active',b.dataset.tone==='natural'));$('personalText').value=personalTemplate(id,'natural');$('personalSheet').classList.remove('hidden')}
+function closePersonal(){$('personalSheet').classList.add('hidden')}
+function changeTone(t){document.querySelectorAll('#toneTabs button').forEach(b=>b.classList.toggle('active',b.dataset.tone===t));$('personalText').value=personalTemplate(personalTarget,t)}
+async function copyText(t){try{await navigator.clipboard.writeText(t);toast('已複製')}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('已複製')}}
+async function checkAppUpdate(){if(!('serviceWorker'in navigator)){toast('目前環境不支援自動更新');return}try{const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs)await r.update();toast('已檢查更新，將重新載入');setTimeout(()=>location.reload(),700)}catch(e){toast('更新檢查失敗')}}
+async function installApp(){if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;return}alert('Android：用 Chrome 選單選「安裝應用程式／加到主畫面」。\niPhone：Safari → 分享 → 加入主畫面。')}
+$('leaderSelect').onchange=e=>{selectedLeader=e.target.value;visibleLimit=6;careLimit=8;closeMember();renderAll()};$('periodSelect').onchange=e=>{selectedPeriod=e.target.value;pairingCache=new Map();visibleLimit=6;nativeChartChoice=selectedPeriod;renderAll();if(currentMember&&!String(currentMember).startsWith('prospect:'))renderNativeMemberCharts(currentMember,nativeChartCount,selectedPeriod)};document.querySelectorAll('#radarTabs button').forEach(b=>b.onclick=()=>{selectedRadar=b.dataset.radar;visibleLimit=6;document.querySelectorAll('#radarTabs button').forEach(x=>x.classList.toggle('active',x===b));renderCandidates()});document.querySelectorAll('#sideTabs button').forEach(b=>b.onclick=()=>{selectedSide=b.dataset.side;visibleLimit=6;document.querySelectorAll('#sideTabs button').forEach(x=>x.classList.toggle('active',x===b));renderCandidates()});$('toggleMoreBtn').onclick=()=>{const step=Number($('toggleMoreBtn').dataset.step||0);visibleLimit=step>0?visibleLimit+step:6;renderCandidates()};$('dataBtn').onclick=openDataSheet;document.querySelectorAll('[data-close-sheet]').forEach(x=>x.onclick=closeDataSheet);document.querySelectorAll('[data-close-member]').forEach(x=>x.onclick=closeMember);$('importFile').onchange=e=>{const f=e.target.files?.[0];if(f)importData(f);e.target.value=''};$('importFile2').onchange=e=>{const f=e.target.files?.[0];if(f)importData(f);e.target.value=''};$('exportBtn').onclick=exportBackup;$('clearBtn').onclick=clearAll;$('saveMemberBtn').onclick=()=>saveMember(true);$('addLogBtn').onclick=addLog;$('crmCycle').onchange=()=>{const d=Number($('crmCycle').value||0),last=$('crmLast').value;if(d>0&&last)$('crmNext').value=addDaysStr(last,d)};$('crmLast').onchange=()=>{const d=Number($('crmCycle').value||0),last=$('crmLast').value;if(d>0&&last)$('crmNext').value=addDaysStr(last,d)};$('crmPhone').oninput=e=>updateCallBtn(e.target.value);
+
+$('manualAddBtn').onclick=openManual;
+document.querySelectorAll('[data-close-manual]').forEach(x=>x.onclick=closeManual);
+$('manualSearch').oninput=e=>searchManualMembers(e.target.value);
+$('saveManualBtn').onclick=saveManual;
+$('stopFollowBtn').onclick=stopOrRestoreCurrent;
+$('convertMemberBtn').onclick=convertProspect;
+$('extractTopicBtn').onclick=extractTopic;
+$('scanTopicBtn').onclick=scanTopic;
+document.querySelectorAll('[data-close-personal]').forEach(x=>x.onclick=closePersonal);
+document.querySelectorAll('#toneTabs button').forEach(b=>b.onclick=()=>changeTone(b.dataset.tone));
+$('copyPersonalBtn').onclick=()=>copyText($('personalText').value);
+$('linePersonalBtn').onclick=()=>lineShare($('personalText').value,personalTarget);
+$('updateAppBtn').onclick=checkAppUpdate;
+$('installBtn').onclick=installApp;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e});
+
+
+const nativeMode = new URLSearchParams(location.search).get('native') === '1';
+let nativeStatuses = {}, nativeSyncQueue = Promise.resolve(), nativeRefreshBusy = false, nativeRefreshAgain = false, nativeChartCount = 24, nativeChartChoice = "";
+let insightsModel=null,insightsData=null,insightsStatuses=null,careLimit=8,careSaving=false;
+const insightLists=new Map();
+function businessModel(){if(!dataset||!window.AtomyInsights)return null;if(insightsData!==dataset||insightsStatuses!==nativeStatuses){insightsModel=AtomyInsights.create(dataset,nativeStatuses);insightsData=dataset;insightsStatuses=nativeStatuses}return insightsModel}
+function insightPercent(value){return value===null?'—':`${value.toFixed(1)}%`}
+function insightListRow(row,repeat=false,complete=false){
+  const label=repeat?(row.repeated?'本期已見續購':row.repeatAdjusted?'有明細，淨PV未轉正':complete?'本期尚未見續購':'本期資料待補齊'):(row.state==='bought'?'已觀察到首購':row.state==='adjusted'?'有明細，淨PV未轉正':row.state==='unknown'?'首購資料待補齊':'已讀日期尚未見首購');
+  const side=row.side==='L'?'左線':row.side==='R'?'右線':'左右待確認',hit=repeat?row.repeated:row.bought;
+  return `<div class="insightPerson"><div><button class="personLink" data-insight-member="${esc(row.member)}">${esc(row.name)}</button><small>${esc(side)} · 入會 ${esc(row.joined)}</small></div><span class="insightBadge ${hit?'hit':''}">${esc(label)}</span></div>`;
+}
+function insightList(prefix,rows,repeat,complete){insightLists.set(prefix,{rows,repeat,complete,limit:12});return `<div id="${prefix}Rows">${rows.slice(0,12).map(row=>insightListRow(row,repeat,complete)).join('')||'<div class="chartNote">目前沒有符合條件的已知會員。</div>'}</div><button class="wideBtn ${rows.length<=12?'hidden':''}" id="${prefix}More" data-insight-more="${prefix}">再顯示 12 位（共 ${rows.length} 位）</button>`}
+function businessHtml(id,period,prefix){
+  const model=businessModel(),today=AtomyInsights.today(),s=model.summary(id,period,today),bought=s.newcomers.members.filter(m=>m.bought).length,showPeople=value=>s.hasData?`${fmt.format(value)} 人`:'—';
+  const top=s.contributors.slice(0,3),freshText=!s.hasData?'本期尚未讀取購買資料。':!s.complete?'本期日期資料尚未完整，這些是已讀到的購買訊號；待補齊者不當成未購買。':'本期截至查詢日期已有資料涵蓋。';
+  return `<div class="chartNote insightPeriod">${esc(periodLabel(period))} · 此會員左右整個分支</div><div class="insightGrid"><div class="insightMetric"><small>左線活躍購買</small><strong>${showPeople(s.active.L)}</strong></div><div class="insightMetric"><small>右線活躍購買</small><strong>${showPeople(s.active.R)}</strong></div><div class="insightMetric"><small>新人首購</small><strong>${s.hasData?`${bought} 人`:'—'}</strong><span>本期已知 ${s.newcomers.members.length} 位新人</span></div><div class="insightMetric"><small>新人回購</small><strong>${showPeople(s.repeatCount)}</strong><span>上期已首購新人 ${s.repeat.length} 人</span></div></div><div class="concentrationBox"><h4>業績集中程度</h4><div class="concentrationNumbers"><div><small>前 1 位貢獻</small><strong>${insightPercent(s.top1)}</strong></div><div><small>前 3 位貢獻</small><strong>${insightPercent(s.top3)}</strong></div></div><div class="concentrationTrack" role="img" aria-label="前3位貢獻 ${insightPercent(s.top3)}"><span style="width:${s.top3===null?0:Math.min(100,s.top3)}%"></span></div><div class="chartNote">已讀 ${s.contributors.length} 位正淨 PV 購買者。${s.negativePv<0?`負淨 PV 另計 ${formatPv(s.negativePv)}。`:''}</div>${top.map((m,i)=>`<div class="contributor"><span>${i+1}. ${model.members.has(m.member)?`<button class="personLink" data-insight-member="${esc(m.member)}">${esc(m.name)}</button>`:esc(m.name)}</span><b>${formatPv(m.pv)} PV</b></div>`).join('')}</div><details class="insightDetails"><summary>查看本期新人首購名單（${s.newcomers.members.length}）</summary>${insightList(prefix+'New',s.newcomers.members,false,s.complete)}</details><details class="insightDetails"><summary>查看上期新人回購名單（${s.repeat.length}）</summary>${insightList(prefix+'Repeat',s.repeat,true,s.complete)}</details><div class="insightNotice">${freshText}${s.quick?' 組織目前為近期分支快速更新，名單與分支統計可能尚未齊全。':''}${s.newcomers.unknownDates?` 有 ${s.newcomers.unknownDates} 位會員缺少有效入會日期，未歸入新人。`:''}${s.active.U?` 有 ${s.active.U} 位活躍購買者左右待確認。`:''}${s.unmapped?` 有 ${s.unmapped} 位購買者尚未連到組織，建議完整更新後確認下層分析。`:''}${!s.previousCohortComplete?' 上期首購資料尚未齊全，回購名單目前僅列已觀察到的首購者。':''}</div><details class="insightRules"><summary>這些數字怎麼算？</summary><p>活躍購買＝同一會員本期所有明細合計淨 PV 大於 0，每人計一次，會員本人不計。</p><p>新人首購＝本期新加入、入會後於本期已有正淨 PV；新人回購＝上一期已首購的新人，本期再次有正淨 PV。</p><p>集中程度以各會員的正淨 PV 合計作分母；負淨 PV 另外列示。數字依目前已讀資料計算。</p></details>`;
+}
+function renderBusinessDashboard(){const box=$('businessDashboard');if(!nativeMode||!dataset||!selectedPeriod||!businessModel()){box.classList.add('hidden');return}box.classList.remove('hidden');box.innerHTML=`<div class="sectionTitle"><div><small>TEAM GROWTH</small><h2>經營概況</h2></div></div>${businessHtml(selectedLeader,selectedPeriod,'dashboardInsight')}`}
+function renderMemberBusiness(id,period){const box=$('memberBusinessInsights');if(!nativeMode||!businessModel()||!AtomyInsights.bounds(period)){box.classList.add('hidden');return}box.classList.remove('hidden');box.innerHTML=`<h3>經營成長與購買結構</h3>${businessHtml(id,period,'memberInsight')}`}
+function renderCareList(){
+  const box=$('todayCareCard'),model=businessModel();if(!nativeMode||!dataset||!model){box.classList.add('hidden');return}
+  const today=AtomyInsights.today(),care=model.care(selectedLeader,today,crmStore);box.classList.remove('hidden');
+  box.innerHTML=`<div class="sectionTitle"><div><small>TODAY · ${today}</small><h2>今日關懷清單</h2></div><span class="careCount">${care.items.length} 人</span></div><div class="chartNote">聯繫排程與購買訊號合併，同一人只列一次。</div>${care.items.slice(0,careLimit).map(item=>`<article class="carePerson"><h4>${esc(item.name)}</h4><div class="careReasons">${item.reasons.map(reason=>`<span>${esc(reason)}</span>`).join('')}</div><div class="careActions"><button class="secondary" data-care-open="${esc(item.member)}">查看與記錄</button><button class="primary" data-care-done="${esc(item.member)}">已聯繫</button></div></article>`).join('')||'<div class="emptyMini">目前沒有符合條件的關懷項目。</div>'}${care.items.length>careLimit?'<button class="wideBtn" data-care-more="1">再顯示 12 位</button>':''}<div class="insightNotice">${!care.fresh?'購買資料尚未更新到今天，目前先顯示 CRM 聯繫排程。':!care.purchaseReady||!care.historyReady?'部分購買日期仍有缺漏，資料不足的首購／回購提醒會暫緩。':'購買提醒依目前完整已讀日期判斷。'}${care.quick?' 組織為近期分支快速更新，尚未涵蓋的會員可能未列入。':''}按「已聯繫」會在本機記錄，並依追蹤週期安排下次日期。</div>`;
+}
+async function finishCare(id){
+  const today=AtomyInsights.today(),r=cleanCrmRecord(crmStore[id]||{member:id,name:graph?.memberMap.get(id)?.name||'',leaderMember:selectedLeader},id);
+  const alreadyLogged=r.lastContact===today&&(r.logs||[]).some(log=>log.date===today&&log.note==='完成今日關懷');
+  r.lastContact=today;r.nextContact=r.cycleDays>0?AtomyInsights.add(today,r.cycleDays):'';r.archived=false;r.updatedAt=nowIso();
+  if(!alreadyLogged)r.logs.push({id:'care-'+Date.now(),date:today,channel:'其他',note:'完成今日關懷',createdAt:nowIso()});const next={...crmStore,[id]:r};
+  await dbSet('crm',next);crmStore=next;renderCandidates();renderFollow();toast('已記錄聯繫，並更新下次追蹤');
+}
+document.addEventListener('click',event=>{
+  const target=event.target.closest?.('[data-insight-member],[data-insight-more],[data-care-open],[data-care-done],[data-care-more]');if(!target)return;
+  if(target.dataset.insightMember){openMember(target.dataset.insightMember);return}
+  if(target.dataset.insightMore){const prefix=target.dataset.insightMore,list=insightLists.get(prefix);if(!list)return;list.limit+=12;$(prefix+'Rows').innerHTML=list.rows.slice(0,list.limit).map(row=>insightListRow(row,list.repeat,list.complete)).join('');target.classList.toggle('hidden',list.limit>=list.rows.length);return}
+  if(target.dataset.careMore){careLimit+=12;renderCareList();return}
+  if(target.dataset.careOpen){openMember(target.dataset.careOpen);const details=document.querySelector('.crmDetails');if(details){details.open=true;setTimeout(()=>details.scrollIntoView({block:'start',behavior:'smooth'}),50)}return}
+  if(target.dataset.careDone){if(careSaving)return;careSaving=true;target.disabled=true;finishCare(target.dataset.careDone).catch(()=>{target.disabled=false;toast('儲存未完成，請再試一次')}).finally(()=>{careSaving=false})}
+});
+function requestDataUpdate(){ if(window.AtomyApp) window.AtomyApp.openUpdate(); }
+function renderSnapshotBanner(){
+  if(!nativeMode)return;
+  $('dataInfo').textContent=dataset?`已載入 ${dataset.organization.members.length} 位會員、${Object.keys(dataset.salesHistory||{}).length} 期業績。資料會在更新後自動帶入，不需要匯入檔案。`:'尚未取得組織資料，請回到資料更新頁面登入。';
+  const box=$('snapshotBanner'),status=nativeStatuses[selectedPeriod];
+  if(!box)return;
+  if(!dataset){box.classList.add('hidden');return}
+  box.classList.remove('hidden');
+  if(!status?.capturedAt){box.classList.add('warn');box.textContent='此期尚無 APP 抓取紀錄；圖表中的未讀期別會保留空白。';return}
+  const captured=new Date(status.capturedAt).toLocaleString('zh-TW');
+  if(status.scope==='incremental'){
+    const query=status.window?.period||status.period||{};
+    box.classList.toggle('warn',!status.complete||!status.windowReconciled||!!status.lastAttempt);
+    box.textContent=`${periodLabel(selectedPeriod)} · 最近更新 ${query.start||''}～${query.end||''}，抓取於 ${captured}。更新區間 ${status.windowRows??0} 筆，合併後本期 ${status.rows??0} 筆。`+
+      (status.complete?'本期截至查詢日期已有資料涵蓋。':'本期較早日期仍有缺漏，可選「補齊最近 24 期」。')+
+      (status.windowReconciled?' 本次日期區間與官方總計相符。':' 本次日期區間與官方即時總計有差異。')+
+      (status.lastAttempt?' 最近另有未完成更新，目前保留上次資料。':'');
+    return;
+  }
+  box.classList.toggle('warn',!status.complete||!status.reconciled);
+  box.textContent=`${periodLabel(selectedPeriod)} · 抓取於 ${captured} · ${status.rows??0} 筆。`+
+    (status.complete?'本次頁面已讀取完成。':'目前為部分資料，這一期尚未讀完。')+
+    (status.reconciled?' 與畫面總計相符。':' 官方即時總計與本次快照可能有差異。')+
+    (status.lastAttempt?' 最近另有一次未完成的更新，目前顯示先前較完整的資料。':'');
+}
+function validJoinDate(raw){
+  const m=String(raw||'').trim().match(/^(\d{4})[-/]?(\d{2})[-/]?(\d{2})(?:[T\s].*)?$/);
+  if(!m)return '';
+  const date=new Date(Date.UTC(Number(m[1]),Number(m[2])-1,Number(m[3])));
+  return date.getUTCFullYear()===Number(m[1])&&date.getUTCMonth()+1===Number(m[2])&&date.getUTCDate()===Number(m[3])?`${m[1]}-${m[2]}-${m[3]}`:'';
+}
+function organizationDate(){
+  const value=dataset?.exportedAt;
+  if(!value)return '';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(value))return validJoinDate(value);
+  const date=new Date(value);
+  if(!Number.isFinite(date.getTime()))return '';
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);
+  const part=t=>parts.find(p=>p.type===t)?.value;
+  return `${part('year')}-${part('month')}-${part('day')}`;
+}
+function memberGrowthSnapshot(id,keys){
+  const sets=descendantsBySide(id),asOf=organizationDate(),unknown={L:0,R:0,U:0},totals={L:0,R:0,U:0},byPeriod=new Map();
+  for(const side of ['L','R','U'])for(const member of sets[side]){
+    totals[side]++;
+    const date=validJoinDate(graph.memberMap.get(member)?.joinDate);
+    if(!date||(asOf&&date>asOf)){unknown[side]++;continue}
+    const key=periodKey(date),counts=byPeriod.get(key)||{L:0,R:0,U:0};
+    counts[side]++;byPeriod.set(key,counts);
+  }
+  return {asOf,unknown,totals,partial:dataset?.updateMode==='quick',rows:keys.map(key=>{
+    const match=key.match(/^(\d{4}-\d{2})-P([12])$/),start=match?`${match[1]}-${match[2]==='1'?'01':'16'}`:'';
+    const covered=!!start&&(!asOf||start<=asOf),counts=byPeriod.get(key)||{L:0,R:0,U:0};
+    return {key,left:covered?counts.L:null,right:covered?counts.R:null,unclassified:covered?counts.U:null};
+  })};
+}
+function growthNumber(value,missing=0){return value===null?'—':`${missing?'至少 ':''}${fmt.format(value)} 人`}
+function growthCardFacts(id){
+  if(!nativeMode)return '';
+  const data=memberGrowthSnapshot(id,[selectedPeriod]),row=data.rows[0];
+  return `<span>左線新人 <b>${growthNumber(row.left,data.unknown.L||data.partial)}</b></span><span>右線新人 <b>${growthNumber(row.right,data.unknown.R||data.partial)}</b></span>`;
+}
+function chartSvg(keys, series, chosen, bars=false,metric='pv'){
+  const width=700,height=310,L=83,R=18,T=24,B=60,pw=width-L-R,ph=height-T-B;
+  const values=series.flatMap(s=>s.values.filter(v=>v!==null));
+  const people=metric==='people',low=Math.min(0,...values),high=Math.max(people||values.some(v=>v!==0)?1:10000,...values),span=high-low||1;
+  const x=i=>L+(i+.5)*pw/keys.length,y=v=>T+(high-v)/span*ph;
+  let html=`<svg class="memberChart" viewBox="0 0 ${width} ${height}" role="img" aria-label="近${keys.length}期${people?'左右新增會員人數':'PV走勢'}"><desc>${people?'依目前組織與入會日期統計，未涵蓋期別留空。':'空白期別表示尚未取得資料，並非零業績。'}</desc>`;
+  const steps=people?Math.min(3,Math.max(1,Math.ceil(high))):3;
+  for(let i=0;i<=steps;i++){const value=low+span*i/steps,py=y(value);html+=`<line x1="${L}" y1="${py}" x2="${width-R}" y2="${py}" stroke="#e6eef5"/><text x="${L-10}" y="${py+7}" text-anchor="end" fill="#718a9e" font-size="20">${esc(people?fmt.format(Math.round(value)):formatPv(value))}</text>`}
+  const selected=keys.indexOf(chosen);if(selected>=0)html+=`<line x1="${x(selected)}" y1="${T}" x2="${x(selected)}" y2="${height-B}" stroke="#9dc7de" stroke-dasharray="5 6"/>`;
+  series.forEach((s,seriesIndex)=>{
+    if(bars){s.values.forEach((v,i)=>{if(v===null){if(seriesIndex===0)html+=`<text x="${x(i)}" y="${y(0)-7}" text-anchor="middle" fill="#a6b6c3" font-size="20">·</text>`;return}const top=Math.min(y(v),y(0)),h=Math.max(2,Math.abs(y(v)-y(0))),band=pw/keys.length*.64,barWidth=band/series.length;html+=`<rect data-chart-key="${keys[i]}" x="${x(i)-band/2+seriesIndex*barWidth}" y="${top}" width="${barWidth}" height="${h}" rx="3" fill="${s.color}" opacity="${keys[i]===chosen?1:.65}"/>`})}
+    else{let path='',drawing=false;s.values.forEach((v,i)=>{if(v===null){drawing=false;return}path+=`${drawing?'L':'M'}${x(i)},${y(v)} `;drawing=true});html+=`<path d="${path}" fill="none" stroke="${s.color}" stroke-width="4" stroke-linejoin="round"/>`;s.values.forEach((v,i)=>{if(v!==null)html+=`<circle data-chart-key="${keys[i]}" cx="${x(i)}" cy="${y(v)}" r="${keys[i]===chosen?7:4}" fill="${s.color}"/>`})}
+  });
+  const labels=new Set([0,keys.length-1,...Array.from({length:4},(_,i)=>Math.round((i+1)*(keys.length-1)/5))]);
+  labels.forEach(i=>html+=`<text x="${x(i)}" y="${height-20}" text-anchor="middle" fill="#718a9e" font-size="20">${esc(shortPeriod(keys[i]))}</text>`);
+  return html+'</svg>';
+}
+function renderNativeMemberCharts(id,count=24,chosen=selectedPeriod){
+  $('memberGrowthHistory').classList.add('hidden');
+  $('memberBusinessInsights').classList.add('hidden');
+  if(!nativeMode||String(id).startsWith('prospect:'))return;
+  nativeChartCount=count;nativeChartChoice=chosen;
+  const chartBase=AtomyInsights.bounds(selectedPeriod)?selectedPeriod:AtomyInsights.key(AtomyInsights.today());
+  const keys=recentPeriods(chartBase,count),known=k=>Object.prototype.hasOwnProperty.call(dataset.salesHistory||{},k);
+  const pairs=keys.map(k=>{if(!known(k))return{left:null,right:null};const maps=pairingMaps(k);return{left:Number(maps.left.get(String(id))||0),right:Number(maps.right.get(String(id))||0)}});
+  const picked=keys.indexOf(chosen)>=0?chosen:keys.at(-1),index=keys.indexOf(picked),pair=pairs[index];
+  const controls=`<div class="chartControls"><select id="chartSpan"><option value="8" ${count===8?'selected':''}>近 8 期</option><option value="24" ${count===24?'selected':''}>近 24 期 · 約一年</option></select><select id="chartPeriod">${keys.map(k=>`<option value="${k}" ${k===picked?'selected':''}>${esc(periodLabel(k))}${known(k)?'':' · 業績未讀'}</option>`).join('')}</select></div>`;
+  $('memberPairHistory').innerHTML=`<h3>左右線業績走勢</h3>${controls}<div class="chartMetrics"><div class="chartMetric"><small>左線 · ${esc(shortPeriod(picked))}</small><strong>${formatPv(pair.left)}</strong></div><div class="chartMetric"><small>右線 · ${esc(shortPeriod(picked))}</small><strong>${formatPv(pair.right)}</strong></div></div><div class="chartLegend"><span><i class="legendDot" style="background:#087eb9"></i>左線</span><span><i class="legendDot" style="background:#16a398"></i>右線</span></div>${chartSvg(keys,[{color:'#087eb9',values:pairs.map(p=>p.left)},{color:'#16a398',values:pairs.map(p=>p.right)}],picked)}<div class="chartNote">已有 ${keys.filter(known).length}／${keys.length} 期資料。空白代表未讀取；左右依目前組織關係推算。點圖上的資料點或選期別可查看數字。</div>`;
+  const pv=keys.map(k=>known(k)?memberPvAt(id,k):null);
+  const growth=memberGrowthSnapshot(id,keys),newcomers=growth.rows[index];
+  const missing=growth.unknown.L+growth.unknown.R,unclassified=growth.totals.U;
+  const dateText=growth.asOf?`組織${growth.partial?'快速':''}更新：${growth.asOf}。`:'組織更新時間未提供。';
+  $('memberGrowthHistory').classList.remove('hidden');
+  $('memberGrowthHistory').innerHTML=`<h3>左右線新增會員</h3><div class="chartNote growthPeriod">${esc(periodLabel(picked))} · 按入會日期</div><div class="chartMetrics"><div class="chartMetric"><small>左線新人</small><strong>${growthNumber(newcomers.left,growth.unknown.L||growth.partial)}</strong></div><div class="chartMetric"><small>右線新人</small><strong>${growthNumber(newcomers.right,growth.unknown.R||growth.partial)}</strong></div></div><div class="chartLegend"><span><i class="legendDot" style="background:#087eb9"></i>左線</span><span><i class="legendDot" style="background:#16a398"></i>右線</span></div>${chartSvg(keys,[{color:'#087eb9',values:growth.rows.map(row=>row.left)},{color:'#16a398',values:growth.rows.map(row=>row.right)}],picked,true,'people')}<div class="chartNote">${dateText}${growth.partial?`近期分支已重掃，完整組織基準為 ${(dataset.fullScanAt||'').slice(0,10)||'未提供'}；新人數顯示目前已知下限。`:""}左右為這位會員的整個安置分支，包含所有層級。依目前組織與入會日統計，已不在組織中的會員無法回推；組織資料尚未涵蓋的期別留空。${missing?` 左線 ${growth.unknown.L} 人、右線 ${growth.unknown.R} 人缺少有效入會日期，未計入人數。`:''}${unclassified?` 另有 ${unclassified} 人的左右關係未能確認。`:''}</div><button class="growthUpdateBtn secondary" id="growthUpdate">更新組織資料</button><div class="chartNote">日常更新會先掃近期分支；完整核對時可勾選「重新掃描完整組織」。</div>`;
+  $('growthUpdate').onclick=requestDataUpdate;
+  renderMemberBusiness(id,picked);
+  $('memberPurchaseHistory').innerHTML=`<h3>個人購買 PV</h3><div class="chartMetric"><small>${esc(periodLabel(picked))}</small><strong>${formatPv(pv[index])} PV</strong></div>${chartSvg(keys,[{color:'#087eb9',values:pv}],picked,true)}<div class="chartNote">資料為 APP 各次讀取的快照；未完整期別以資料狀態為準。</div>`;
+  $('chartSpan').onchange=e=>renderNativeMemberCharts(id,Number(e.target.value),picked);
+  $('chartPeriod').onchange=e=>renderNativeMemberCharts(id,count,e.target.value);
+  document.querySelectorAll('[data-chart-key]').forEach(el=>el.onclick=()=>renderNativeMemberCharts(id,count,el.dataset.chartKey));
+  const details=document.querySelector('.crmDetails');if(details)details.open=false;
+}
+async function syncNativeSnapshot(){
+  if(!nativeMode)return;
+  const [orgResponse,salesResponse,statusResponse]=await Promise.all([
+    fetch('/data/current_dataset.json',{cache:'no-store'}),fetch('/data/sales_history.json',{cache:'no-store'}),
+    fetch('/data/sales_status.json',{cache:'no-store'})]);
+  const existing=await dbGet('dataset');let next=existing;
+  assertAccountDataset(existing);
+  if(orgResponse.ok){const incoming=await orgResponse.json();if(incoming.organization?.complete){
+    assertAccountDataset(incoming);
+    if(existing?.organization?.rootId===incoming.organization.rootId){incoming.leaders=existing.leaders?.length?existing.leaders:incoming.leaders;incoming.salesHistory={...existing.salesHistory,...incoming.salesHistory}}
+    next=incoming;
+  }}
+  if(statusResponse.ok){nativeStatuses=await statusResponse.json();await dbSet('nativeStatuses',nativeStatuses)}
+  if(!next){renderAll();return}
+  if(salesResponse.ok)next.salesHistory={...next.salesHistory,...await salesResponse.json()};
+  await dbSet('dataset',next);dataset=next;prepareData();renderAll();
+  if(currentMember&&!String(currentMember).startsWith('prospect:'))renderNativeMemberCharts(currentMember,nativeChartCount,nativeChartChoice||selectedPeriod);
+  window.__atomyNativeStatus={periods:Object.keys(next.salesHistory||{}).length,members:next.organization.members.length};
+}
+window.AtomyRefreshNative=()=>{
+  if(nativeRefreshBusy){nativeRefreshAgain=true;return nativeSyncQueue;}
+  nativeRefreshBusy=true;
+  nativeSyncQueue=Promise.resolve().then(()=>window.AtomyReady).then(syncNativeSnapshot).catch(e=>{
+    toast('載入 APP 資料失敗：'+e.message);window.__atomyNativeStatus={error:e.message};
+  }).finally(()=>{nativeRefreshBusy=false;if(nativeRefreshAgain){nativeRefreshAgain=false;return window.AtomyRefreshNative()}});return nativeSyncQueue;
+};
+if(nativeMode){
+  document.body.classList.add('nativeApp');
+  document.querySelectorAll('input[type=file]').forEach(input=>input.closest('label')?.classList.add('hiddenNative'));
+  ['installBtn','updateAppBtn','clearBtn'].forEach(id=>$(id).classList.add('hiddenNative'));
+  $('emptyView').querySelector('h2').textContent='尚未取得團隊資料';
+  $('emptyView').querySelector('p').textContent='回到資料更新頁面，登入後即可自動讀取組織與業績。';
+  const action=document.createElement('button');action.className='primary big';action.textContent='前往資料更新';action.onclick=requestDataUpdate;$('emptyView').append(action);
+  $('app').querySelector('footer').textContent='Atomy 行動戰情 · 資料與追蹤保存在這支手機';
+  document.querySelector('.appHeader small').textContent=accountScope?`會員 ${accountScope} / 行動戰情室`:'ATOMY / 行動戰情室';
+  document.querySelector('.sectionTitle small').textContent='團隊觀察';
+  const update=document.createElement('button');update.className='secondary big';update.textContent='前往資料更新';update.onclick=requestDataUpdate;$('dataSheet').querySelector('.dataInfo').after(update);
+  window.addEventListener('focus',()=>window.AtomyRefreshNative());
+}
+
+window.AtomyReady=(async()=>{try{await migrateLegacyAccount();const saved=await dbGet('dataset')||null;assertAccountDataset(saved);dataset=saved;crmStore=await dbGet('crm')||{};exclusions=await dbGet('exclusions')||{};nativeStatuses=await dbGet('nativeStatuses')||{};if(dataset)prepareData();renderAll()}catch(e){console.error(e);renderAll()}})();
+window.AtomySyncNativeData=window.AtomyRefreshNative;
+window.AtomySyncVerifiedSales=window.AtomyRefreshNative;
+if(nativeMode)window.AtomyReady.then(()=>window.AtomyRefreshNative());
+
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+name: AtomyWarRoom
+options:
+  bundleIdPrefix: tw.atomy.warroom
+  deploymentTarget:
+    iOS: "16.0"
+targets:
+  AtomyWarRoom:
+    type: application
+    platform: iOS
+    sources:
+      - path: AtomyWarRoom
+        excludes:
+          - "Assets/**"
+      - path: AtomyWarRoom/Assets
+        type: folder
+    info:
+      path: AtomyWarRoom/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: tw.atomy.warroom.prototype.ios
+        MARKETING_VERSION: 1.7.0
+        CURRENT_PROJECT_VERSION: 170
+        SWIFT_VERSION: 5.9
