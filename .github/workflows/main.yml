@@ -1,0 +1,55 @@
+name: Build iOS Native IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-ipa:
+    runs-on: macos-14
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare Project Structure
+        run: |
+          if [ -f Atomy-iOS-Native-v1.7.0.zip ]; then
+            unzip -o Atomy-iOS-Native-v1.7.0.zip
+          fi
+          if [ ! -f project.yml ]; then
+            FOUND_YML=$(find . -maxdepth 3 -name "project.yml" | head -n 1)
+            if [ -n "$FOUND_YML" ]; then
+              PROJ_DIR=$(dirname "$FOUND_YML")
+              cp -R "$PROJ_DIR"/* .
+            fi
+          fi
+
+      - name: Generate Xcode Project with XcodeGen
+        run: |
+          brew install xcodegen
+          xcodegen generate
+
+      - name: Build Unsigned iOS App Bundle
+        run: |
+          xcodebuild clean build \
+            -project AtomyWarRoom.xcodeproj \
+            -scheme AtomyWarRoom \
+            -sdk iphoneos \
+            -configuration Release \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Package .app into .ipa
+        run: |
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/AtomyWarRoom.app Payload/
+          zip -r9 Atomy-iOS-v1.7.0.ipa Payload
+
+      - name: Upload Compiled iOS .ipa Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Atomy-iOS-v1.7.0-IPA
+          path: Atomy-iOS-v1.7.0.ipa
